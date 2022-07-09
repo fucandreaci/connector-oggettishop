@@ -11,6 +11,8 @@ import {destinationData} from './api/destinationData';
 import {category} from './controller/category';
 import {product as productController} from './controller/product';
 import {sourceToDestinationMapper} from './models/models.mapper';
+import {sourceController} from './controller/source.controller';
+import {splitProducts} from './utils/splitProducts.utils';
 
 /*
 sourceData.fetchData().then(async products => {
@@ -37,7 +39,11 @@ sourceData.fetchData().then(async products => {
     })
 })*/
 
-sourceData.fetchData().then(sourceProducts => {
-  sourceProducts.forEach(sourceProduct => {
-  })
-})
+const init = async () => {
+  const sourceProducts = await sourceController.getProducts()
+  const sourceAvailability = await sourceController.getAvailability()
+
+  const { parents, children } = splitProducts.splitParentsChildren(sourceProducts)
+}
+
+init()

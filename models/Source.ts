@@ -40,3 +40,18 @@ export interface Misura {
     _: number,
     unit_of_measure: string
 }
+
+export interface Availability {
+    codice: string,
+    arrivi: {
+        arrivo: Arrivo[]
+    }
+    update: number
+}
+
+export interface Arrivo {
+    maga: string,
+    data: string,
+    qta: number,
+    tipoData: string
+}

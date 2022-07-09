@@ -7,12 +7,18 @@
  */
 
 import allProd from '../allProd.json';
-import {SourceProduct} from '../models/Source';
+import availability from '../dispo.json';
+import {Availability, SourceProduct} from '../models/Source';
 
-const fetchData = (): Promise<SourceProduct[]> => {
+const fetchProducts = (): Promise<SourceProduct[]> => {
     return Promise.resolve(allProd);
 }
 
+const fetchAvailability = (): Promise<Availability[]> => {
+    return Promise.resolve(availability);
+}
+
 export const sourceData = {
-    fetchData
+    fetchProducts,
+    fetchAvailability
 }
