@@ -1,0 +1,707 @@
+[
+  {
+    "codice": "CA042BL",
+    "articolo_padre": "CA042",
+    "nome_articolo": "TYPE",
+    "descrizione_articolo": "zaino in poliestere 420D\n2 tasche anteriori con zip\ntasca per portatile e tablet\ntaschino interno con zip\nscomparto su retro con chiusura antitaccheggio\nlucchetto di sicurezza con combinazione a 3 cifre\nconnessione USB\nretro imbottito con tasca nascosta\nfascia per trolley sul retro\nspallacci imbottiti\nmoschettone interno portachiavi\nshopper Cavallari su richiesta: CA830\nTecnica di stampa consigliata: serigrafica",
+    "dimensione_articolo": "cm 40x46x19 ca",
+    "materiale_articolo": "100% poliestere",
+    "colore_articolo": "BL",
+    "deco_colore_articolo": "Blu",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 1.2,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 50,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 60,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 65,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0.195,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 25,
+    "settore": "Bags",
+    "categoria": "Zaini",
+    "Listino_rivenditori": 19,
+    "Listino_pubblico": 57,
+    "Link_Foto": {
+      "Foto": [
+        "https://catalogs-online.com/images/500x500/CA042BL.jpg",
+        "https://catalogs-online.com/images/gallery/CA042/CA042_2_big.jpg",
+        "https://catalogs-online.com/images/gallery/CA042/CA042_3_big.jpg",
+        "https://catalogs-online.com/images/gallery/CA042/CA042_4_big.jpg",
+        "https://catalogs-online.com/images/gallery/CA042/CA042_5_big.jpg",
+        "https://catalogs-online.com/images/gallery/CA042/CA042_6_big.jpg",
+        "https://catalogs-online.com/images/gallery/CA042/CA042_7_big.jpg",
+        "https://catalogs-online.com/images/70x70/CA042BL.jpg",
+        "https://catalogs-online.com/images/150x150/CA042BL.jpg",
+        "https://catalogs-online.com/images/223x223/CA042BL.jpg",
+        "https://catalogs-online.com/images/278x278/CA042BL.jpg",
+        "https://catalogs-online.com/images/700x700/CA042BL.jpg"
+      ]
+    },
+    "Foto": "CA042BL",
+    "catalogo": "TAG",
+    "update": 1656738510
+  },
+  {
+    "codice": "CA820",
+    "articolo_padre": "CA820",
+    "nome_articolo": "SHOPPER CAVALLARI",
+    "descrizione_articolo": "shopper in carta\nstampa a caldo\nmanici in cordoncino\nabbinabile agli articoli: CA067 - CA081",
+    "dimensione_articolo": "cm 37x12x40 ca",
+    "materiale_articolo": "",
+    "colore_articolo": "",
+    "deco_colore_articolo": "",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.01,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 10,
+    "settore": "Paper Shoppers",
+    "categoria": "Brands",
+    "Listino_rivenditori": 1.8,
+    "Listino_pubblico": 53.94,
+    "Link_Foto": {
+      "Foto": [
+        "https://catalogs-online.com/images/500x500/CA820.jpg",
+        "https://catalogs-online.com/images/70x70/CA820.jpg",
+        "https://catalogs-online.com/images/150x150/CA820.jpg",
+        "https://catalogs-online.com/images/223x223/CA820.jpg",
+        "https://catalogs-online.com/images/278x278/CA820.jpg",
+        "https://catalogs-online.com/images/700x700/CA820.jpg"
+      ]
+    },
+    "Foto": "CA820",
+    "catalogo": "TAG",
+    "update": 1656738510
+  },
+  {
+    "codice": "CA830",
+    "articolo_padre": "CA830",
+    "nome_articolo": "SHOPPER CAVALLARI",
+    "descrizione_articolo": "shopper in carta\nstampa a caldo\nmanici in cordoncino\nabbinabile agli articoli: CA031 - CA033 - CA035 - CA036 - CA037 - CA039 - CA042 - CA043 - CA045 - CA046 - CA047 - CA057 - CA085",
+    "dimensione_articolo": "cm 57x17x45 ca",
+    "materiale_articolo": "",
+    "colore_articolo": "",
+    "deco_colore_articolo": "",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.01,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 10,
+    "settore": "Paper Shoppers",
+    "categoria": "Brands",
+    "Listino_rivenditori": 2.4,
+    "Listino_pubblico": 71.94,
+    "Link_Foto": {
+      "Foto": [
+        "https://catalogs-online.com/images/500x500/CA830.jpg",
+        "https://catalogs-online.com/images/70x70/CA830.jpg",
+        "https://catalogs-online.com/images/150x150/CA830.jpg",
+        "https://catalogs-online.com/images/223x223/CA830.jpg",
+        "https://catalogs-online.com/images/278x278/CA830.jpg",
+        "https://catalogs-online.com/images/700x700/CA830.jpg"
+      ]
+    },
+    "Foto": "CA830",
+    "catalogo": "TAG",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU130GI",
+    "articolo_padre": "DU130",
+    "nome_articolo": "PANIGALE",
+    "descrizione_articolo": "penna stilografica Ducati\nfusto e cappuccio ottone\nlacca multistrato ad alto spessore (oltre 40 micron)\nfinitura lacca extra lucida\npennino in acciaio punta media\nconfezione in elegante astuccio regalo ricamato\nminuterie in metallo cromato",
+    "dimensione_articolo": "diametro cm 1,3xh14 ca",
+    "materiale_articolo": "ottone e metallo",
+    "colore_articolo": "GI",
+    "deco_colore_articolo": "Giallo",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.11,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 10,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 8.7,
+    "Listino_pubblico": 26.09999,
+    "Link_Foto": "",
+    "Foto": "DU130GI",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU155GI",
+    "articolo_padre": "DU155",
+    "nome_articolo": "NECESSAIRE DA VIAGGIO DUCATI",
+    "descrizione_articolo": "chiusura con zip\ntasca interna\ntasca posteriore con zip\nconfezione in astuccio regalo",
+    "dimensione_articolo": "cm 24x15,5x5,5 ca",
+    "materiale_articolo": "vera pelle italiana",
+    "colore_articolo": "GI",
+    "deco_colore_articolo": "Giallo",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.2,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 25.2,
+    "Listino_pubblico": 75.6,
+    "Link_Foto": "",
+    "Foto": "DU155GI",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU160AR",
+    "articolo_padre": "DU160",
+    "nome_articolo": "P/PENNE - P/OCCHIALI DUCATI",
+    "descrizione_articolo": "p/penne 3 posti\nutilizzabile anche come portaocchiali\nchiusura con clip\nconfezione in astuccio regalo",
+    "dimensione_articolo": "cm 7,5x15,5x2 ca",
+    "materiale_articolo": "vera pele italiana",
+    "colore_articolo": "AR",
+    "deco_colore_articolo": "Arancio",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.05,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 12.32,
+    "Listino_pubblico": 36.96,
+    "Link_Foto": "",
+    "Foto": "DU160AR",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU160GI",
+    "articolo_padre": "DU160",
+    "nome_articolo": "P/PENNE - P/OCCHIALI DUCATI",
+    "descrizione_articolo": "p/penne 3 posti\nutilizzabile anche come portaocchiali\nchiusura con clip\nconfezione in astuccio regalo",
+    "dimensione_articolo": "cm 7,5x15,5x2 ca",
+    "materiale_articolo": "vera pele italiana",
+    "colore_articolo": "GI",
+    "deco_colore_articolo": "Giallo",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.05,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 12.32,
+    "Listino_pubblico": 36.96,
+    "Link_Foto": "",
+    "Foto": "DU160GI",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU160NE",
+    "articolo_padre": "DU160",
+    "nome_articolo": "P/PENNE - P/OCCHIALI DUCATI",
+    "descrizione_articolo": "p/penne 3 posti\nutilizzabile anche come portaocchiali\nchiusura con clip\nconfezione in astuccio regalo",
+    "dimensione_articolo": "cm 7,5x15,5x2 ca",
+    "materiale_articolo": "vera pele italiana",
+    "colore_articolo": "NE",
+    "deco_colore_articolo": "Nero",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.05,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 12.32,
+    "Listino_pubblico": 36.96,
+    "Link_Foto": "",
+    "Foto": "DU160NE",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU160RO",
+    "articolo_padre": "DU160",
+    "nome_articolo": "P/PENNE - P/OCCHIALI DUCATI",
+    "descrizione_articolo": "p/penne 3 posti\nutilizzabile anche come portaocchiali\nchiusura con clip\nconfezione in astuccio regalo",
+    "dimensione_articolo": "cm 7,5x15,5x2 ca",
+    "materiale_articolo": "vera pele italiana",
+    "colore_articolo": "RO",
+    "deco_colore_articolo": "Rosso",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.1,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 12.32,
+    "Listino_pubblico": 36.96,
+    "Link_Foto": "",
+    "Foto": "DU160RO",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU165AR",
+    "articolo_padre": "DU165",
+    "nome_articolo": "P/DOCUMENTI DUCATI",
+    "descrizione_articolo": "corredato di blocco notes\nportapenna\nchiusura con bottone\nconfezione in elegante astuccio regalo",
+    "dimensione_articolo": "cm 13x19,5 ca (chiuso)",
+    "materiale_articolo": "vera pelle italiana",
+    "colore_articolo": "AR",
+    "deco_colore_articolo": "Arancio",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.3,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 17.92,
+    "Listino_pubblico": 53.76,
+    "Link_Foto": "",
+    "Foto": "DU165AR",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU165GI",
+    "articolo_padre": "DU165",
+    "nome_articolo": "P/DOCUMENTI DUCATI",
+    "descrizione_articolo": "corredato di blocco notes\nportapenna\nchiusura con bottone\nconfezione in elegante astuccio regalo",
+    "dimensione_articolo": "cm 13x19,5 ca (chiuso)",
+    "materiale_articolo": "vera pelle italiana",
+    "colore_articolo": "GI",
+    "deco_colore_articolo": "Giallo",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.3,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 17.92,
+    "Listino_pubblico": 53.76,
+    "Link_Foto": "",
+    "Foto": "DU165GI",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU165NE",
+    "articolo_padre": "DU165",
+    "nome_articolo": "P/DOCUMENTI DUCATI",
+    "descrizione_articolo": "corredato di blocco notes\nportapenna\nchiusura con bottone\nconfezione in elegante astuccio regalo",
+    "dimensione_articolo": "cm 13x19,5 ca (chiuso)",
+    "materiale_articolo": "vera pelle italiana",
+    "colore_articolo": "NE",
+    "deco_colore_articolo": "Nero",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.3,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 17.92,
+    "Listino_pubblico": 53.76,
+    "Link_Foto": "",
+    "Foto": "DU165NE",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU165RO",
+    "articolo_padre": "DU165",
+    "nome_articolo": "P/DOCUMENTI DUCATI",
+    "descrizione_articolo": "corredato di blocco notes\nportapenna\nchiusura con bottone\nconfezione in elegante astuccio regalo",
+    "dimensione_articolo": "cm 13x19,5 ca (chiuso)",
+    "materiale_articolo": "vera pelle italiana",
+    "colore_articolo": "RO",
+    "deco_colore_articolo": "Rosso",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.3,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 17.92,
+    "Listino_pubblico": 53.76,
+    "Link_Foto": "",
+    "Foto": "DU165RO",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU170AR",
+    "articolo_padre": "DU170",
+    "nome_articolo": "P/PENNE DUCATI",
+    "descrizione_articolo": "p/penne 1 posto\nconfezione in astuccio regalo",
+    "dimensione_articolo": "cm 3x15,5x2 ca",
+    "materiale_articolo": "vera pelle italiana",
+    "colore_articolo": "AR",
+    "deco_colore_articolo": "Arancio",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.03,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 8.96,
+    "Listino_pubblico": 26.88,
+    "Link_Foto": "",
+    "Foto": "DU170AR",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU175GI",
+    "articolo_padre": "DU175",
+    "nome_articolo": "P/CHIAVI P/MONETE DUCATI",
+    "descrizione_articolo": "anello cromato\nchiusura con zip\nconfezione in astuccio regalo",
+    "dimensione_articolo": "cm 10x5 ca",
+    "materiale_articolo": "vera pelle italiana",
+    "colore_articolo": "GI",
+    "deco_colore_articolo": "Giallo",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.03,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands",
+    "Listino_rivenditori": 8.96,
+    "Listino_pubblico": 26.88,
+    "Link_Foto": "",
+    "Foto": "DU175GI",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  },
+  {
+    "codice": "DU180AR",
+    "articolo_padre": "DU180",
+    "nome_articolo": "POLSINO DUCATI",
+    "descrizione_articolo": "portamonete da polso\nchiusura con zip\nregolabile con velcro\nconfezione in astuccio regalo",
+    "dimensione_articolo": "",
+    "materiale_articolo": "vera pelle italiana",
+    "colore_articolo": "AR",
+    "deco_colore_articolo": "Arancio",
+    "taglia_articolo": "",
+    "peso_articolo": {
+      "_": 0.03,
+      "unit_of_measure": "kg"
+    },
+    "dimensione_1_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_2_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "dimensione_3_carton": {
+      "_": 0,
+      "unit_of_measure": "cm"
+    },
+    "volume_carton": {
+      "_": 0,
+      "unit_of_measure": "m3"
+    },
+    "inner_carton": 1,
+    "box_carton": 0,
+    "export_carton": 1,
+    "settore": "Farmacy & Care",
+    "categoria": "Brands2",
+    "Listino_rivenditori": 10.08,
+    "Listino_pubblico": 30.24,
+    "Link_Foto": "",
+    "Foto": "DU180AR",
+    "catalogo": "OUTLET",
+    "update": 1656738510
+  }
+]
