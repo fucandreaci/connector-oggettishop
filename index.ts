@@ -8,11 +8,11 @@
 
 import {sourceData} from './api/sourceData';
 import {destinationData} from './api/destinationData';
-import {category} from './controller/category';
-import {product as productController} from './controller/product';
-import {sourceToDestinationMapper} from './models/models.mapper';
+import {productController as productController} from './controller/product.controller';
 import {sourceController} from './controller/source.controller';
 import {splitProducts} from './utils/splitProducts.utils';
+import {utils} from './utils/utils';
+import {categoryController} from './controller/category.controller';
 
 /*
 sourceData.fetchData().then(async products => {
@@ -40,10 +40,21 @@ sourceData.fetchData().then(async products => {
 })*/
 
 const init = async () => {
+  // Source products initalization
   const sourceProducts = await sourceController.getProducts()
   const sourceAvailability = await sourceController.getAvailability()
 
   const { parents, children } = splitProducts.splitParentsChildren(sourceProducts)
+
+  const destinationProducts = await productController.fetchProducts()
+  const categories = await categoryController.fetchCategories()
+
+  // Insert new products
+  for (const parentProd of parents) {
+    // TODO: implement the fetch category callback
+    // TODO: add the insert product callback
+    const product = await productController.insertNewProduct(destinationProducts, parentProd, categories, () => {}, sourceAvailability, parents)
+  }
 }
 
 init()

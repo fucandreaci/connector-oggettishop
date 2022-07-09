@@ -11,7 +11,7 @@ export interface Product {
     name: string;
     description: string;
     short_description: string;
-    regular_price: number
+    regular_price: string
     stock_quantity: number;
     dimensions: Dimension;
     parent_id?: number;
@@ -21,14 +21,18 @@ export interface Product {
 }
 
 export interface Dimension{
-    length: number | ''; // lunghezza
-    width: number | ''; // larghezza
-    height: number | ''; // altezza
+    length: string | ''; // lunghezza
+    width: string | ''; // larghezza
+    height: string | ''; // altezza
 }
 
-export type Category = {
+export interface Category {
     id?: number;
     name?: string;
+}
+
+export interface id {
+    id: number;
 }
 
 export interface Tag {

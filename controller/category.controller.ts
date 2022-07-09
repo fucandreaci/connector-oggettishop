@@ -1,13 +1,18 @@
 /*
- * File: category
+ * File: category.controller
  * Project: connector-node
  * File Created: 05/07/22 - 16:20
  * Author: Andrea Fucci (fucciandrea01@gmail.com)
  * Copyright © 2022-2022 Andrea Fucci
  */
 
-import {Category} from '../models/Destination';
+import {Category, Product} from '../models/Destination';
 import {destinationData} from '../api/destinationData';
+
+const fetchCategories = async () : Promise<Category[]>=> {
+    const data = (await destinationData.fetchCategories()).data
+    return data
+}
 
 const exist = (name: string, categories: Category[]): Category | undefined => {
     return categories.find(category => category.name === name);
@@ -28,14 +33,15 @@ const insertCategoryIfNotExist = async (category: Category, categories: Category
 
     const existentCategory = exist(category.name, categories);
     if (!existentCategory) {
-        const categories = create(category);
+        const newCategory = await create(category);
         await fetchCategories()
-        return categories;
+        return newCategory;
     }
     return existentCategory;
 }
 
-export const category = {
+export const categoryController = {
+    fetchCategories,
     exist,
     create,
     insertCategoryIfNotExist

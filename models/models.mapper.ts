@@ -8,9 +8,8 @@
 
 import {SourceProduct} from './Source';
 import {Category, Dimension, Image, Product} from './Destination';
-import {product} from '../controller/product';
 
-const getImages = (product: SourceProduct): Image[] => {
+/*const getImages = (product: SourceProduct): Image[] => {
     const images: Image[] = [];
 
     if (typeof product.Link_Foto !== 'string') {
@@ -25,9 +24,9 @@ const getImages = (product: SourceProduct): Image[] => {
     }
 
     return images;
-}
+}*/
 
-const getDimension = (product: SourceProduct): Dimension => {
+/*const getDimension = (product: SourceProduct): Dimension => {
     const originalDimension = product.dimensione_articolo;
     if (!originalDimension) {
         return {
@@ -60,7 +59,7 @@ const getDimension = (product: SourceProduct): Dimension => {
         width: validParts.length >= 2 ? parseFloat(validParts[1]) : '',
         height: validParts.length >= 3 ? parseFloat(validParts[2]) : ''
     }
-}
+}*/
 
 export const getCategoryId = (categories: Category[], category: string): Category => {
     const categoryId = categories.find(c => c.name === category)?.id;
@@ -70,7 +69,7 @@ export const getCategoryId = (categories: Category[], category: string): Categor
     };
 }
 
-export const sourceToDestinationMapper = (sourceProduct: SourceProduct, categories: Category[]): Product => {
+/*export const sourceToDestinationMapper = (sourceProduct: SourceProduct, categories: Category[]): Product => {
     return {
         name: sourceProduct.nome_articolo,
         categories: [getCategoryId(categories, sourceProduct.categoria)],
@@ -81,7 +80,7 @@ export const sourceToDestinationMapper = (sourceProduct: SourceProduct, categori
         stock_quantity: 0,
         dimensions: getDimension(sourceProduct)
     }
-}
+}*/
 
 /*
 export const sourceToDestinationWithParentMapper = (sourceProduct: SourceProduct, sourceProducts: SourceProduct[], products: Product[]): Product => {
