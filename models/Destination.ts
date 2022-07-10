@@ -9,6 +9,7 @@
 export interface Product {
     id?: number,
     name: string;
+    sku: string;
     description: string;
     short_description: string;
     regular_price: string

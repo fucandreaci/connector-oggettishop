@@ -39,22 +39,28 @@ sourceData.fetchData().then(async products => {
     })
 })*/
 
-const init = async () => {
-  // Source products initalization
+const execute = async () => {
+  // Source products initialization
   const sourceProducts = await sourceController.getProducts()
   const sourceAvailability = await sourceController.getAvailability()
 
   const { parents, children } = splitProducts.splitParentsChildren(sourceProducts)
 
-  const destinationProducts = await productController.fetchProducts()
-  const categories = await categoryController.fetchCategories()
+  // Destination products initialization
+  let destinationProducts = await productController.fetchProducts()
+  let categories = await categoryController.fetchCategories()
 
+  parents.forEach(parent => {
+    console.log(parent.nome_articolo, parent.Listino_pubblico)
+  })
   // Insert new products
   for (const parentProd of parents) {
-    // TODO: implement the fetch category callback
-    // TODO: add the insert product callback
-    const product = await productController.insertNewProduct(destinationProducts, parentProd, categories, () => {}, sourceAvailability, parents)
+    const product = await productController.insertNewProduct(destinationProducts, parentProd, categories, sourceAvailability, parents, async () => {
+      categories = await categoryController.fetchCategories()
+    }, async () => {
+      destinationProducts = await productController.fetchProducts()
+    })
   }
 }
 
-init()
+execute()

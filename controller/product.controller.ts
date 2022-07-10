@@ -17,8 +17,8 @@ const fetchProducts = async () : Promise<Product[]>=> {
     return data
 }
 
-const exist = (name: string, products: Product[]): Product | undefined => {
-    return products.find(product => product.name === name);
+const exist = (sku: string, products: Product[]): Product | undefined => {
+    return products.find(product => product.sku === sku);
 }
 
 const create = async (product: Product): Promise<Product | undefined>=> {
@@ -45,7 +45,7 @@ const insertProductIfNotExist = async (product: Product, products: Product[], fe
         return undefined;
     }
 
-    const existentProduct = exist(product.name, products);
+    const existentProduct = exist(product.sku, products);
     if (!existentProduct) {
         const products = create(product);
         await fetchProducts()
@@ -54,9 +54,9 @@ const insertProductIfNotExist = async (product: Product, products: Product[], fe
     return existentProduct;
 }
 
-const insertNewProduct = async (products: Product[], product: SourceProduct, categories: Category[], fetchCategories: () => void, availableProducts: Availability[], sourceProducts: SourceProduct[]) => {
+const insertNewProduct = async (products: Product[], product: SourceProduct, categories: Category[], availableProducts: Availability[], sourceProducts: SourceProduct[], fetchCategories: () => void, fetchProducts: () => void) => {
     // If exist a product with the same name, we don't create a new one but we return the existent one
-    const findedProduct = exist(product.nome_articolo, products);
+    const findedProduct = exist(product.codice, products);
     if (findedProduct != null) {
         return findedProduct;
     }
@@ -83,6 +83,7 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
     const newProduct: Product = {
         name: product.nome_articolo,
         categories: category.id ? [category] : [],
+        sku: product.codice,
         description: product.descrizione_articolo,
         images,
         dimensions: sizes,
@@ -93,6 +94,7 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
     }
 
     const createdProduct = await create(newProduct);
+    await fetchProducts()
     return createdProduct;
 }
 
