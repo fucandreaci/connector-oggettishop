@@ -13,7 +13,7 @@ import {categoryController} from './category.controller';
 import {utils} from '../utils/utils';
 
 const fetchProducts = async () : Promise<Product[]>=> {
-    const data = (await destinationData.fetchProducts()).data
+    const data = await destinationData.fetchProducts()
     return data
 }
 
@@ -30,12 +30,10 @@ const create = async (product: Product): Promise<Product | undefined>=> {
 }
 
 const getParentId = (product: SourceProduct, sourceProducts: SourceProduct[], products: Product[]): number => {
-    const parentId = product.nome_articolo;
-    const parent = sourceProducts.find(sourceProduct => sourceProduct.nome_articolo === parentId);
+    const parentId = product.articolo_padre;
+    if (parentId === product.codice) return -1;
 
-    if (!parent) return -1;
-
-    const parentProduct = products.find(product => product.name === parent.nome_articolo);
+    const parentProduct = products.find(product => product.sku === parentId);
     if (!parentProduct) return -1;
     return parentProduct.id || -1;
 }

@@ -10,12 +10,13 @@ import {Category, Product} from '../models/Destination';
 import {destinationData} from '../api/destinationData';
 
 const fetchCategories = async () : Promise<Category[]>=> {
-    const data = (await destinationData.fetchCategories()).data
+    const data = await destinationData.fetchCategories()
     return data
 }
 
 const exist = (name: string, categories: Category[]): Category | undefined => {
-    return categories.find(category => category.name === name);
+    const cat = categories.find(category => category.name?.toLowerCase().replace("&amp;", "&") === name.toLowerCase());
+    return cat
 }
 
 const create = async (category: Category): Promise<Category | undefined>=> {

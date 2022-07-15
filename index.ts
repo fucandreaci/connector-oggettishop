@@ -6,12 +6,9 @@
  * Copyright © 2022-2022 Andrea Fucci
  */
 
-import {sourceData} from './api/sourceData';
-import {destinationData} from './api/destinationData';
 import {productController as productController} from './controller/product.controller';
 import {sourceController} from './controller/source.controller';
 import {splitProducts} from './utils/splitProducts.utils';
-import {utils} from './utils/utils';
 import {categoryController} from './controller/category.controller';
 
 /*
@@ -55,11 +52,26 @@ const execute = async () => {
   })
   // Insert new products
   for (const parentProd of parents) {
-    const product = await productController.insertNewProduct(destinationProducts, parentProd, categories, sourceAvailability, parents, async () => {
-      categories = await categoryController.fetchCategories()
-    }, async () => {
-      destinationProducts = await productController.fetchProducts()
-    })
+    try {
+      const product = await productController.insertNewProduct(destinationProducts, parentProd, categories, sourceAvailability, parents, async () => {
+        categories = await categoryController.fetchCategories()
+      }, () => {})
+      if (product) destinationProducts.push(product)
+    } catch (e) {
+      console.log('Si è verificato un errore')
+    }
+  }
+  // Insert new products child
+  for (const childProd of children) {
+    try {
+      const product = await productController.insertNewProduct(destinationProducts, childProd, categories, sourceAvailability, children, async () => {
+        categories = await categoryController.fetchCategories()
+      }, () => {})
+
+      if (product) destinationProducts.push(product)
+    } catch (e) {
+        console.log('Si è verificato un errore')
+    }
   }
 }
 

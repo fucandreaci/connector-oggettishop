@@ -12,12 +12,30 @@ import {AxiosResponse} from 'axios';
 
 const api = getApi();
 
-const fetchCategories = async (): Promise<AxiosResponse<Category[]>> => {
-    return api.get("products/categories");
+const fetchCategories = async (): Promise<Category[]> => {
+    const categories: Category[] = []
+    const res = await api.get("products/categories");
+    categories.push(...res.data)
+
+    for (let i = 2; i <= res.headers['x-wp-totalpages']; i++) {
+        const result = await api.get("products/categories?page=" + i);
+        categories.push(...result.data)
+    }
+
+    return categories
 }
 
-const fetchProducts = async (): Promise<AxiosResponse<Product[]>> => {
-    return api.get("products");
+const fetchProducts = async (): Promise<Product[]> => {
+    const products: Product[] = []
+    const res = await api.get("products");
+    products.push(...res.data)
+
+    for (let i = 2; i <= res.headers['x-wp-totalpages']; i++) {
+        const result = await api.get("products?page=" + i);
+        products.push(...result.data)
+    }
+
+    return products
 }
 
 const fetchVariations = async (productId: number): Promise<any> => { // TODO: check the type
