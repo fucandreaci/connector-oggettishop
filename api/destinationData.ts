@@ -42,6 +42,10 @@ const fetchVariations = async (productId: number): Promise<any> => { // TODO: ch
     return api.get(`products/${productId}/variations`);
 }
 
+const fetchById = async (productId: number): Promise<any> => { // TODO: check the type
+    return api.get(`products/${productId}`);
+}
+
 const fetchAttributes = async (): Promise<AxiosResponse<Attribute[]>> => {
     return api.get("products/attributes");
 }
@@ -65,5 +69,6 @@ export const destinationData = {
     fetchAttributes,
     fetchAttributeTerms,
     createCategory,
-    createProduct
+    createProduct,
+    fetchById
 }
