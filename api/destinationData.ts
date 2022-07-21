@@ -38,7 +38,7 @@ const fetchProducts = async (): Promise<Product[]> => {
     return products
 }
 
-const fetchVariations = async (productId: number): Promise<any> => { // TODO: check the type
+const fetchProductVariations = async (productId: number): Promise<any> => { // TODO: check the type
     return api.get(`products/${productId}/variations`);
 }
 
@@ -46,8 +46,12 @@ const fetchById = async (productId: number): Promise<any> => { // TODO: check th
     return api.get(`products/${productId}`);
 }
 
-const fetchAttributes = async (): Promise<AxiosResponse<Attribute[]>> => {
-    return api.get("products/attributes");
+const fetchAttributes = async (): Promise<Attribute[]> => {
+    const attributes: Attribute[] = []
+    const res = await api.get("products/attributes");
+    attributes.push(...res.data)
+
+    return attributes;
 }
 
 const fetchAttributeTerms = async (attributeId: number): Promise<AxiosResponse<AttributeTerm[]>> => {
@@ -62,13 +66,24 @@ const createProduct = async (product: Product): Promise<AxiosResponse<Product>> 
     return api.post("products", product);
 }
 
+const createVariation = async (productId: number, variationProduct: Product): Promise<AxiosResponse<Product>> => {
+    const newProd = {
+        regular_price: variationProduct.regular_price,
+        attributes: variationProduct.attributes,
+    }
+
+    console.log(newProd)
+    return await api.post(`products/${productId}/variations`, newProd);
+}
+
 export const destinationData = {
     fetchCategories,
     fetchProducts,
-    fetchVariations,
+    fetchProductVariations,
     fetchAttributes,
     fetchAttributeTerms,
     createCategory,
     createProduct,
-    fetchById
+    fetchById,
+    createVariation
 }

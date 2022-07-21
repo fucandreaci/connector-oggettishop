@@ -46,12 +46,10 @@ const execute = async () => {
   // Destination products initialization
   let destinationProducts = await productController.fetchProducts()
   let categories = await categoryController.fetchCategories()
+  const attributes = await productController.fetchAttributes()
 
-  parents.forEach(parent => {
-    console.log(parent.nome_articolo, parent.Listino_pubblico)
-  })
   // Insert new products
-  for (const parentProd of parents) {
+/*  for (const parentProd of parents) {
     try {
       const product = await productController.insertNewProduct(destinationProducts, parentProd, categories, sourceAvailability, parents, async () => {
         categories = await categoryController.fetchCategories()
@@ -60,17 +58,17 @@ const execute = async () => {
     } catch (e) {
       console.log('Si è verificato un errore')
     }
-  }
+  }*/
   // Insert new products child
-  for (const childProd of children) {
+  for (const childProd of children.slice(0, 4)) {
     try {
-      const product = await productController.insertNewProduct(destinationProducts, childProd, categories, sourceAvailability, children, async () => {
+      const product = await productController.insertProductVariation(destinationProducts, childProd, categories, sourceAvailability, children, attributes, async () => {
         categories = await categoryController.fetchCategories()
       }, () => {})
 
       if (product) destinationProducts.push(product)
     } catch (e) {
-        console.log('Si è verificato un errore')
+        // console.log('Si è verificato un errore', (e as any).response)
     }
   }
 }

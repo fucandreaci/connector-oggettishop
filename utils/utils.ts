@@ -7,7 +7,7 @@
  */
 
 import {Availability, SourceProduct} from '../models/Source';
-import {Dimension, Image} from '../models/Destination';
+import {Attribute, AttributeName, Dimension, Image} from '../models/Destination';
 
 const getDimension = (product: SourceProduct): Dimension => {
     const originalDimension = product.dimensione_articolo;
@@ -70,9 +70,38 @@ const getQtaAvailable = (availableProduct: Availability | undefined): number => 
     return availableProduct.arrivi.arrivo.reduce((acc, curr) => acc + curr.qta, 0)
 }
 
+const getAttributeIdByName = (name: AttributeName, attributes: Attribute[]): number => {
+    const obj = attributes.find(a => a.name === name);
+    if (!obj) return -1;
+    return obj.id || -1;
+}
+
+const getAttributes = (product: SourceProduct, attributes: Attribute[]): Attribute[] => {
+    const attributesObj: Attribute[] = [];
+
+    attributesObj.push({
+        id: getAttributeIdByName(AttributeName.COLOR, attributes),
+        option: product.colore_articolo
+    })
+
+    attributesObj.push({
+        id: getAttributeIdByName(AttributeName.SIZE, attributes),
+        option: product.taglia_articolo
+    })
+
+    attributesObj.push({
+        id: getAttributeIdByName(AttributeName.MATERIALE, attributes),
+        option: product.materiale_articolo
+    })
+
+    return attributesObj;
+}
+
 export const utils = {
     getDimension,
     getImages,
     getAvailability,
-    getQtaAvailable
+    getQtaAvailable,
+    getAttributeIdByName,
+    getAttributes
 }

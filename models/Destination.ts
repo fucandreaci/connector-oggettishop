@@ -6,7 +6,7 @@
  * Copyright © 2022-2022 Andrea Fucci
  */
 
-export interface Product {
+export type Product = {
     id?: number,
     name: string;
     sku: string;
@@ -18,8 +18,12 @@ export interface Product {
     parent_id?: number;
     categories: Category[];
     tags?: Tag[];
+    attributes?: Attribute[];
+} & ({
     images: Image[];
-}
+} | {
+    image: Image
+})
 
 export interface Dimension{
     length: string | ''; // lunghezza
@@ -30,6 +34,7 @@ export interface Dimension{
 export interface Category {
     id?: number;
     name?: string;
+    parent?: number;
 }
 
 export interface id {
@@ -43,12 +48,14 @@ export interface Tag {
 
 export type Attribute = {
     id?: number;
-    name: string;
+    name?: string;
     slug: string;
+    type?: 'select';
 } | {
     id?: number;
-    name: string;
-    options: string[];
+    name?: string;
+    type?: 'select';
+    option: string;
 }
 
 export interface AttributeTerm {
@@ -59,4 +66,10 @@ export interface AttributeTerm {
 export interface Image {
     id?: number;
     src: string;
+}
+
+export enum AttributeName {
+    COLOR = 'Color',
+    SIZE = 'Size',
+    MATERIALE = 'Materiale',
 }
