@@ -38,6 +38,7 @@ const insertCategoryIfNotExist = async (category: Category, categories: Category
         await fetchCategories()
         return newCategory;
     }
+    await fetchCategories()
     return existentCategory;
 }
 

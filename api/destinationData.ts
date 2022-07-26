@@ -72,7 +72,7 @@ const createVariation = async (productId: number, variationProduct: Product): Pr
         attributes: variationProduct.attributes,
     }
 
-    console.log(newProd)
+    //console.log(newProd)
     return await api.post(`products/${productId}/variations`, newProd);
 }
 

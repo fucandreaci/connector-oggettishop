@@ -63,7 +63,9 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
     // If not exist a product with the same name, we create a new one
 
     // Fetch or create the category
-    const category = await categoryController.insertCategoryIfNotExist({name: product.categoria}, categories, fetchCategories)
+    const parentCategory = await categoryController.insertCategoryIfNotExist({name: product.catalogo}, categories, fetchCategories)
+    const category = await categoryController.insertCategoryIfNotExist({name: product.categoria, parent: parentCategory?.id}, categories, fetchCategories)
+    if (category) categories.push(category)
     if (!category) {
         throw new Error("Errore nella creazione della categoria")
     }
@@ -74,7 +76,7 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         descrizione_articolo: '',
     }
 
-    const parent = await insertNewProduct(products, parentProd, categories, availableProducts, sourceProducts, fetchCategories, fetchProducts);
+    const parent = await insertNewProduct(products, parentProd, categories, availableProducts, sourceProducts, attributes, fetchCategories, fetchProducts);
     if (!parent || !parent.id) {
         throw new Error("Errore nella creazione del prodotto genitore")
     }
@@ -124,7 +126,7 @@ const insertProductIfNotExist = async (product: Product, products: Product[], fe
     return existentProduct;
 }
 
-const insertNewProduct = async (products: Product[], product: SourceProduct, categories: Category[], availableProducts: Availability[], sourceProducts: SourceProduct[], fetchCategories: () => void, fetchProducts: () => void) => {
+const insertNewProduct = async (products: Product[], product: SourceProduct, categories: Category[], availableProducts: Availability[], sourceProducts: SourceProduct[], attributes: Attribute[], fetchCategories: () => void, fetchProducts: () => void) => {
     // If exist a product with the same name, we don't create a new one but we return the existent one
     const findedProduct = exist(product.codice, products);
     if (findedProduct != null) {
@@ -161,7 +163,8 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
         stock_quantity: qtaAvailable,
         regular_price: product.Listino_pubblico.toString(),
         short_description: product.descrizione_articolo,
-        parent_id: getParentId(product, sourceProducts, products)
+        parent_id: getParentId(product, sourceProducts, products),
+        attributes: utils.getAttributes(product, attributes)
     }
 
     const createdProduct = await create(newProduct);
