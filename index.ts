@@ -59,9 +59,9 @@ const execute = async () => {
       console.log('Si è verificato un errore')
     }
   }*/
+
   // Insert new products child
-  for (const childProd of children.slice(0, 4)) {
-    console.log(categories.map(c => c.name))
+  for (const childProd of children.slice(0, 10)) {
     try {
       const product = await productController.insertProductVariation(destinationProducts, childProd, categories, sourceAvailability, children, attributes, async () => {
         categories = await categoryController.fetchCategories()

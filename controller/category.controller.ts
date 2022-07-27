@@ -35,10 +35,10 @@ const insertCategoryIfNotExist = async (category: Category, categories: Category
     const existentCategory = exist(category.name, categories);
     if (!existentCategory) {
         const newCategory = await create(category);
-        await fetchCategories()
+
+        if (newCategory) categories.push(newCategory);
         return newCategory;
     }
-    await fetchCategories()
     return existentCategory;
 }
 

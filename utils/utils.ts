@@ -97,11 +97,36 @@ const getAttributes = (product: SourceProduct, attributes: Attribute[]): Attribu
     return attributesObj;
 }
 
+const getAttributesOptions = (product: SourceProduct, attributes: Attribute[]): Attribute[] => {
+    const attributesObj: Attribute[] = [];
+
+    attributesObj.push({
+        id: getAttributeIdByName(AttributeName.COLOR, attributes),
+        options: [product.colore_articolo],
+        variation: true
+    })
+
+    attributesObj.push({
+        id: getAttributeIdByName(AttributeName.SIZE, attributes),
+        options: [product.taglia_articolo],
+        variation: true
+    })
+
+    attributesObj.push({
+        id: getAttributeIdByName(AttributeName.MATERIALE, attributes),
+        options: [product.materiale_articolo],
+        variation: true
+    })
+
+    return attributesObj;
+}
+
 export const utils = {
     getDimension,
     getImages,
     getAvailability,
     getQtaAvailable,
     getAttributeIdByName,
-    getAttributes
+    getAttributes,
+    getAttributesOptions
 }

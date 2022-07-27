@@ -66,6 +66,10 @@ const createProduct = async (product: Product): Promise<AxiosResponse<Product>> 
     return api.post("products", product);
 }
 
+const updateProduct = async (product: Product): Promise<AxiosResponse<Product>> => {
+  return api.put(`products/${product.id}`, product);
+}
+
 const createVariation = async (productId: number, variationProduct: Product): Promise<AxiosResponse<Product>> => {
     const newProd = {
         regular_price: variationProduct.regular_price,
@@ -74,6 +78,10 @@ const createVariation = async (productId: number, variationProduct: Product): Pr
 
     //console.log(newProd)
     return await api.post(`products/${productId}/variations`, newProd);
+}
+
+const execVariation = async (product: Product) => {
+    return await api.post(`products/${product.id}/variations`, product.attributes);
 }
 
 export const destinationData = {
@@ -85,5 +93,7 @@ export const destinationData = {
     createCategory,
     createProduct,
     fetchById,
-    createVariation
+    createVariation,
+    updateProduct,
+    execVariation
 }

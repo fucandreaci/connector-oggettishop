@@ -76,10 +76,12 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         descrizione_articolo: '',
     }
 
-    const parent = await insertNewProduct(products, parentProd, categories, availableProducts, sourceProducts, attributes, fetchCategories, fetchProducts);
+    const parent = await insertNewProduct(products, parentProd, categories, availableProducts, sourceProducts, attributes, fetchCategories, fetchProducts, true);
     if (!parent || !parent.id) {
         throw new Error("Errore nella creazione del prodotto genitore")
     }
+
+    await updateAttribute(parent, product, attributes)
 
     const parentId = parent.id;
 
@@ -107,6 +109,8 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         attributes: utils.getAttributes(product, attributes)
     }
 
+    console.log(newProduct.attributes)
+
     const createdProduct = await createVariation(parentId, newProduct);
     await fetchProducts()
     return createdProduct;
@@ -126,7 +130,7 @@ const insertProductIfNotExist = async (product: Product, products: Product[], fe
     return existentProduct;
 }
 
-const insertNewProduct = async (products: Product[], product: SourceProduct, categories: Category[], availableProducts: Availability[], sourceProducts: SourceProduct[], attributes: Attribute[], fetchCategories: () => void, fetchProducts: () => void) => {
+const insertNewProduct = async (products: Product[], product: SourceProduct, categories: Category[], availableProducts: Availability[], sourceProducts: SourceProduct[], attributes: Attribute[], fetchCategories: () => void, fetchProducts: () => void, isVariable?: boolean) => {
     // If exist a product with the same name, we don't create a new one but we return the existent one
     const findedProduct = exist(product.codice, products);
     if (findedProduct != null) {
@@ -164,7 +168,8 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
         regular_price: product.Listino_pubblico.toString(),
         short_description: product.descrizione_articolo,
         parent_id: getParentId(product, sourceProducts, products),
-        attributes: utils.getAttributes(product, attributes)
+        attributes: isVariable ? utils.getAttributesOptions(product, attributes) : utils.getAttributes(product, attributes),
+        type: isVariable ? 'variable' : 'simple'
     }
 
     const createdProduct = await create(newProduct);
@@ -172,6 +177,31 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
     return createdProduct;
 }
 
+const update = async (product: Product, fetchProducts?: () => void): Promise<Product|undefined> => {
+    try {
+        const updatedProduct = (await destinationData.updateProduct(product)).data;
+        if (fetchProducts) {
+            await fetchProducts()
+        }
+        return updatedProduct;
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+const createAttributes = async (attributes: Attribute[]) => {
+
+}
+
+const updateAttribute = async (product: Product, sourceProduct: SourceProduct, attributes: Attribute[])/*: Promise<Product|undefined>*/ => {
+    const newAttributes = utils.getAttributes(sourceProduct, attributes);
+    product.attributes = {
+        ...product.attributes,
+        ...newAttributes
+    }
+
+    await destinationData.execVariation(product)
+}
 
 export const productController = {
     exist,
@@ -180,5 +210,6 @@ export const productController = {
     fetchProducts,
     insertNewProduct,
     fetchAttributes,
-    insertProductVariation
+    insertProductVariation,
+    update,
 }

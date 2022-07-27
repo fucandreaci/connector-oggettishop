@@ -19,6 +19,7 @@ export type Product = {
     categories: Category[];
     tags?: Tag[];
     attributes?: Attribute[];
+    type?: 'simple' | 'variable';
 } & ({
     images: Image[];
 } | {
@@ -49,13 +50,14 @@ export interface Tag {
 export type Attribute = {
     id?: number;
     name?: string;
-    slug: string;
     type?: 'select';
+    option: string;
+    variation?: boolean
 } | {
     id?: number;
     name?: string;
-    type?: 'select';
-    option: string;
+    options: string[];
+    variation?: boolean
 }
 
 export interface AttributeTerm {
