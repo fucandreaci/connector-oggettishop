@@ -38,8 +38,8 @@ const fetchProducts = async (): Promise<Product[]> => {
     return products
 }
 
-const fetchProductVariations = async (productId: number): Promise<any> => { // TODO: check the type
-    return api.get(`products/${productId}/variations`);
+const fetchProductVariations = async (productId: number): Promise<AxiosResponse<{attributes: Attribute[]}[]>> => {
+    return api.get(`products/${productId}/variations`)
 }
 
 const fetchById = async (productId: number): Promise<any> => { // TODO: check the type
@@ -76,7 +76,6 @@ const createVariation = async (productId: number, variationProduct: Product): Pr
         attributes: variationProduct.attributes,
     }
 
-    //console.log(newProd)
     return await api.post(`products/${productId}/variations`, newProd);
 }
 

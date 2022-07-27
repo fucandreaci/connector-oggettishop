@@ -51,13 +51,9 @@ export type Attribute = {
     id?: number;
     name?: string;
     type?: 'select';
-    option: string;
+    option?: string;
     variation?: boolean
-} | {
-    id?: number;
-    name?: string;
-    options: string[];
-    variation?: boolean
+    options?: string[];
 }
 
 export interface AttributeTerm {

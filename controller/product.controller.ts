@@ -34,9 +34,16 @@ const fetchAttributes = async () : Promise<Attribute[]>=> {
     return data
 }
 
-const fetchProductVariations = async (productId: number): Promise<Product[]> => {
-    const data = await destinationData.fetchProductVariations(productId)
-    return data
+const fetchProductVariations = async (productId: number): Promise<Array<Attribute[]>> => {
+    const res = await destinationData.fetchProductVariations(productId)
+
+    const variations: Array<Attribute[]> = []
+
+    res.data.forEach((variation) => {
+      variations.push(variation.attributes)
+    })
+
+    return variations
 }
 
 const getParentId = (product: SourceProduct, sourceProducts: SourceProduct[], products: Product[]): number => {
@@ -48,7 +55,45 @@ const getParentId = (product: SourceProduct, sourceProducts: SourceProduct[], pr
     return parentProduct.id || -1;
 }
 
+const getNewProductVariations = (product: Product, variations: Array<Attribute[]>): Product => {
+    let index = 0
+    if (product.attributes) {
+        for (const attribute of product.attributes) {
+            if (!attribute.option) {
+                product.attributes.splice(index, 1)
+            }
+            index++;
+        }
+    }
+
+    if (variations.length == 1 && variations[0].length == 0) return product;
+
+    index = 0;
+    for (const variation of variations) {
+        let find: boolean[] = [];
+        for (const attribute of variation) {
+            const finded = product.attributes?.find(attr => attr.name?.toLowerCase() === attribute.name?.toLowerCase() && attr.option?.toLowerCase() === attribute.option?.toLowerCase())
+            find.push(!(!finded))
+        }
+
+        if (find.length && !find.find(f => f === false)) {
+            product.attributes = []
+            return product
+        }
+
+        index++;
+    }
+
+
+    return product;
+}
+
 const createVariation = async (productId: number, variationProduct: Product) => {
+    const variations: Array<Attribute[]> = await fetchProductVariations(productId)
+    variationProduct = getNewProductVariations(variationProduct, variations)
+
+    if (variationProduct.attributes?.length == 0) return
+
     const res = await destinationData.createVariation(productId, variationProduct)
     return res.data
 }
@@ -73,7 +118,6 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
     const parentProd: SourceProduct = {
         ...product,
         codice: product.articolo_padre,
-        descrizione_articolo: '',
     }
 
     const parent = await insertNewProduct(products, parentProd, categories, availableProducts, sourceProducts, attributes, fetchCategories, fetchProducts, true);
@@ -108,8 +152,6 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         short_description: product.descrizione_articolo,
         attributes: utils.getAttributes(product, attributes)
     }
-
-    console.log(newProduct.attributes)
 
     const createdProduct = await createVariation(parentId, newProduct);
     await fetchProducts()
@@ -189,18 +231,14 @@ const update = async (product: Product, fetchProducts?: () => void): Promise<Pro
     }
 }
 
-const createAttributes = async (attributes: Attribute[]) => {
-
-}
-
 const updateAttribute = async (product: Product, sourceProduct: SourceProduct, attributes: Attribute[])/*: Promise<Product|undefined>*/ => {
-    const newAttributes = utils.getAttributes(sourceProduct, attributes);
+    const newAttributes = utils.getAttributesOptions(sourceProduct, attributes);
     product.attributes = {
         ...product.attributes,
         ...newAttributes
     }
 
-    await destinationData.execVariation(product)
+    await destinationData.updateProduct(product);
 }
 
 export const productController = {
