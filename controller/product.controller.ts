@@ -72,11 +72,13 @@ const getNewProductVariations = (product: Product, variations: Array<Attribute[]
     for (const variation of variations) {
         let find: boolean[] = [];
         for (const attribute of variation) {
-            const finded = product.attributes?.find(attr => attr.name?.toLowerCase() === attribute.name?.toLowerCase() && attr.option?.toLowerCase() === attribute.option?.toLowerCase())
-            find.push(!(!finded))
+            const finded = product.attributes?.find(attr => {
+                return attr.id === attribute.id && attr.option?.toLowerCase() === attribute.option?.toLowerCase()
+            })
+            find.push(finded != undefined)
         }
 
-        if (find.length && !find.find(f => f === false)) {
+        if (find.length && find.indexOf(false) == -1 ) {
             product.attributes = []
             return product
         }
@@ -93,6 +95,7 @@ const createVariation = async (productId: number, variationProduct: Product) => 
     variationProduct = getNewProductVariations(variationProduct, variations)
 
     if (variationProduct.attributes?.length == 0) return
+
 
     const res = await destinationData.createVariation(productId, variationProduct)
     return res.data
@@ -147,6 +150,7 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         description: product.descrizione_articolo,
         image: {src: "https://catalogs-online.com/images/500x500/NK100AR.jpg"},
         dimensions: sizes,
+        manage_stock: true,
         stock_quantity: qtaAvailable,
         regular_price: product.Listino_pubblico.toString(),
         short_description: product.descrizione_articolo,
@@ -180,7 +184,6 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
     }
 
     // If not exist a product with the same name, we create a new one
-
     // Fetch or create the category
     const parentCategory = await categoryController.insertCategoryIfNotExist({name: product.catalogo}, categories, fetchCategories)
     const category = await categoryController.insertCategoryIfNotExist({name: product.categoria, parent: parentCategory?.id}, categories, fetchCategories)
@@ -233,11 +236,7 @@ const update = async (product: Product, fetchProducts?: () => void): Promise<Pro
 
 const updateAttribute = async (product: Product, sourceProduct: SourceProduct, attributes: Attribute[])/*: Promise<Product|undefined>*/ => {
     const newAttributes = utils.getAttributesOptions(sourceProduct, attributes);
-    product.attributes = {
-        ...product.attributes,
-        ...newAttributes
-    }
-
+    product.attributes = utils.mergeAttributes(product.attributes || [], newAttributes)
     await destinationData.updateProduct(product);
 }
 

@@ -12,7 +12,8 @@ export type Product = {
     sku: string;
     description: string;
     short_description: string;
-    regular_price: string
+    regular_price: string;
+    manage_stock?: boolean;
     stock_quantity: number;
     dimensions: Dimension;
     parent_id?: number;

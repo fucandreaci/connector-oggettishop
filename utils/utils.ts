@@ -121,6 +121,32 @@ const getAttributesOptions = (product: SourceProduct, attributes: Attribute[]): 
     return attributesObj;
 }
 
+const mergeAttributes = (attributes: Attribute[], attributesToMerge: Attribute[]): Attribute[] => {
+    attributesToMerge.forEach(attribute => {
+        const obj = attributes.find(a => a.id === attribute.id);
+        if (obj) {
+            attribute.options?.forEach(option => {
+                if (!obj.options) obj.options = [];
+                const finded = obj.options.find(o => o.toLowerCase() === option.toLowerCase());
+                if (!finded) obj.options.push(option);
+            })
+        } else {
+            attributes.push(attribute);
+        }
+    }
+    )
+
+    attributes.forEach(attribute => {
+        if (attribute.options) {
+            attribute.options = attribute.options.filter((option, index, self) => option != '');
+            if (attribute.options.length == 0) {
+                delete attribute.options;
+            }
+        }
+    })
+    return attributes;
+}
+
 export const utils = {
     getDimension,
     getImages,
@@ -128,5 +154,6 @@ export const utils = {
     getQtaAvailable,
     getAttributeIdByName,
     getAttributes,
-    getAttributesOptions
+    getAttributesOptions,
+    mergeAttributes
 }
