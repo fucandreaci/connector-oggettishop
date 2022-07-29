@@ -64,7 +64,7 @@ export interface AttributeTerm {
 
 export interface Image {
     id?: number;
-    src: string;
+    src?: string;
 }
 
 export enum AttributeName {

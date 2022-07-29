@@ -89,10 +89,10 @@ const getAttributes = (product: SourceProduct, attributes: Attribute[]): Attribu
         option: product.taglia_articolo
     })
 
-    attributesObj.push({
+    /*attributesObj.push({
         id: getAttributeIdByName(AttributeName.MATERIALE, attributes),
         option: product.materiale_articolo
-    })
+    })*/
 
     return attributesObj;
 }
@@ -112,11 +112,11 @@ const getAttributesOptions = (product: SourceProduct, attributes: Attribute[]): 
         variation: true
     })
 
-    attributesObj.push({
+    /*attributesObj.push({
         id: getAttributeIdByName(AttributeName.MATERIALE, attributes),
         options: [product.materiale_articolo],
         variation: true
-    })
+    })*/
 
     return attributesObj;
 }

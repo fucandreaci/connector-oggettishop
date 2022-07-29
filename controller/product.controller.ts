@@ -128,7 +128,11 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         throw new Error("Errore nella creazione del prodotto genitore")
     }
 
-    await updateAttribute(parent, product, attributes)
+    try {
+        const updatedData = await updateAttribute(parent, product, attributes)
+    } catch (e) {
+        console.log("Errore", e)
+    }
 
     const parentId = parent.id;
 
@@ -148,7 +152,7 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         categories: category.id ? [category] : [],
         sku: product.codice,
         description: product.descrizione_articolo,
-        image: {src: "https://catalogs-online.com/images/500x500/NK100AR.jpg"},
+        image: images.length > 0 ? images[0] : {},
         dimensions: sizes,
         manage_stock: true,
         stock_quantity: qtaAvailable,
@@ -159,6 +163,7 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
 
     const createdProduct = await createVariation(parentId, newProduct);
     await fetchProducts()
+    console.log("Created product", createdProduct)
     return createdProduct;
 }
 
@@ -195,7 +200,10 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
     const sizes = utils.getDimension(product)
 
     // Obtain the images
-    const images = utils.getImages(product)
+    const getImages = () => {
+        const images = utils.getImages(product)
+        return images.length > 0 ? [images[0]] : [];
+    }
 
     // Obtain the availability
     const availability = utils.getAvailability(product, availableProducts)
@@ -206,18 +214,19 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
         name: product.nome_articolo,
         categories: category.id ? [category] : [],
         sku: product.codice,
-        description: product.descrizione_articolo,
-        images,
+        description: product.descrizione_articolo + ' Materiale: ' + product.materiale_articolo,
+        images: getImages(),
         dimensions: sizes,
         stock_quantity: qtaAvailable,
         regular_price: product.Listino_pubblico.toString(),
-        short_description: product.descrizione_articolo,
+        short_description: product.descrizione_articolo + ' Materiale: ' + product.materiale_articolo,
         parent_id: getParentId(product, sourceProducts, products),
         attributes: isVariable ? utils.getAttributesOptions(product, attributes) : utils.getAttributes(product, attributes),
         type: isVariable ? 'variable' : 'simple'
     }
 
     const createdProduct = await create(newProduct);
+    if (createdProduct != undefined) products.push(createdProduct);
     await fetchProducts()
     return createdProduct;
 }
@@ -237,7 +246,7 @@ const update = async (product: Product, fetchProducts?: () => void): Promise<Pro
 const updateAttribute = async (product: Product, sourceProduct: SourceProduct, attributes: Attribute[])/*: Promise<Product|undefined>*/ => {
     const newAttributes = utils.getAttributesOptions(sourceProduct, attributes);
     product.attributes = utils.mergeAttributes(product.attributes || [], newAttributes)
-    await destinationData.updateProduct(product);
+    return await destinationData.updateProduct(product);
 }
 
 export const productController = {

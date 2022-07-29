@@ -67,7 +67,7 @@ const execute = async () => {
         categories = await categoryController.fetchCategories()
       }, () => {})
 
-      if (product) destinationProducts.push(product)
+      // if (product) destinationProducts.push(product)
     } catch (e) {
         // console.log('Si è verificato un errore', (e as any).response)
     }

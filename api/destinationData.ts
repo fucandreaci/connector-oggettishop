@@ -67,13 +67,16 @@ const createProduct = async (product: Product): Promise<AxiosResponse<Product>> 
 }
 
 const updateProduct = async (product: Product): Promise<AxiosResponse<Product>> => {
-  return api.put(`products/${product.id}`, product);
+  return await api.put(`products/${product.id}`, product);
 }
 
 const createVariation = async (productId: number, variationProduct: Product): Promise<AxiosResponse<Product>> => {
     const newProd = {
         regular_price: variationProduct.regular_price,
         attributes: variationProduct.attributes,
+        manage_stock: true,
+        stock_quantity: variationProduct.stock_quantity,
+        image: 'image' in variationProduct ? variationProduct.image : null,
     }
 
     return await api.post(`products/${productId}/variations`, newProd);
