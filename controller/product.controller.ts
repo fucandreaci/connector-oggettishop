@@ -163,7 +163,6 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
 
     const createdProduct = await createVariation(parentId, newProduct);
     await fetchProducts()
-    console.log("Created product", createdProduct)
     return createdProduct;
 }
 
