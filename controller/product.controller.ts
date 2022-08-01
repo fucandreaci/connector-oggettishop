@@ -156,7 +156,7 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         dimensions: sizes,
         manage_stock: true,
         stock_quantity: qtaAvailable,
-        regular_price: product.Listino_pubblico.toString(),
+        regular_price: (product.Listino_rivenditori * 3).toString(),
         short_description: product.descrizione_articolo,
         attributes: utils.getAttributes(product, attributes)
     }
@@ -189,7 +189,7 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
 
     // If not exist a product with the same name, we create a new one
     // Fetch or create the category
-    const parentCategory = await categoryController.insertCategoryIfNotExist({name: product.catalogo}, categories, fetchCategories)
+    const parentCategory = await categoryController.insertCategoryIfNotExist({name: product.settore}, categories, fetchCategories)
     const category = await categoryController.insertCategoryIfNotExist({name: product.categoria, parent: parentCategory?.id}, categories, fetchCategories)
     if (!category) {
         throw new Error("Errore nella creazione della categoria")
@@ -213,12 +213,13 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
         name: product.nome_articolo,
         categories: category.id ? [category] : [],
         sku: product.codice,
-        description: product.descrizione_articolo + ' Materiale: ' + product.materiale_articolo,
+        description: product.descrizione_articolo + product.materiale_articolo ? ' Materiale: ' + product.materiale_articolo : '',
         images: getImages(),
         dimensions: sizes,
+        manage_stock: !isVariable,
         stock_quantity: qtaAvailable,
-        regular_price: product.Listino_pubblico.toString(),
-        short_description: product.descrizione_articolo + ' Materiale: ' + product.materiale_articolo,
+        regular_price: (product.Listino_rivenditori * 3).toString(),
+        short_description: product.descrizione_articolo + product.materiale_articolo ? ' Materiale: ' + product.materiale_articolo : '',
         parent_id: getParentId(product, sourceProducts, products),
         attributes: isVariable ? utils.getAttributesOptions(product, attributes) : utils.getAttributes(product, attributes),
         type: isVariable ? 'variable' : 'simple'
@@ -245,6 +246,15 @@ const update = async (product: Product, fetchProducts?: () => void): Promise<Pro
 const updateAttribute = async (product: Product, sourceProduct: SourceProduct, attributes: Attribute[])/*: Promise<Product|undefined>*/ => {
     const newAttributes = utils.getAttributesOptions(sourceProduct, attributes);
     product.attributes = utils.mergeAttributes(product.attributes || [], newAttributes)
+
+    const readedImages = utils.getImages(sourceProduct)
+
+    if ('images' in product && product.images.length > 0) {
+        const findedImage = product.images.find(image => image.src === readedImages[0].src)
+        if (!findedImage) {
+            product.images.push(readedImages[0])
+        }
+    }
     return await destinationData.updateProduct(product);
 }
 
