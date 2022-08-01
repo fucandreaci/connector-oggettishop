@@ -38,8 +38,18 @@ const fetchProducts = async (): Promise<Product[]> => {
     return products
 }
 
-const fetchProductVariations = async (productId: number): Promise<AxiosResponse<{attributes: Attribute[]}[]>> => {
-    return api.get(`products/${productId}/variations`)
+const fetchProductVariations = async (productId: number): Promise<{attributes: Attribute[]}[]> => {
+    const variations: {attributes: Attribute[]}[] = []
+    const res = await api.get(`products/${productId}/variations`);
+    variations.push(...res.data)
+
+    for (let i = 2; i <= res.headers['x-wp-totalpages']; i++) {
+        const result = await api.get(`products/${productId}/variations?page=` + i);
+        variations.push(...result.data)
+    }
+
+    return variations
+
 }
 
 const fetchById = async (productId: number): Promise<any> => { // TODO: check the type

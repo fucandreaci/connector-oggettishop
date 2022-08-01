@@ -6,7 +6,7 @@
  * Copyright © 2022-2022 Andrea Fucci
  */
 
-import {Attribute, Category, Product} from '../models/Destination';
+import {Attribute, AttributeName, Category, Product} from '../models/Destination';
 import {destinationData} from '../api/destinationData';
 import {Availability, SourceProduct} from '../models/Source';
 import {categoryController} from './category.controller';
@@ -39,7 +39,7 @@ const fetchProductVariations = async (productId: number): Promise<Array<Attribut
 
     const variations: Array<Attribute[]> = []
 
-    res.data.forEach((variation) => {
+    res.forEach((variation) => {
       variations.push(variation.attributes)
     })
 
@@ -56,38 +56,56 @@ const getParentId = (product: SourceProduct, sourceProducts: SourceProduct[], pr
 }
 
 const getNewProductVariations = (product: Product, variations: Array<Attribute[]>): Product => {
+    let newVariations = product.attributes || []
+
     let index = 0
-    if (product.attributes) {
-        for (const attribute of product.attributes) {
-            if (!attribute.option) {
-                product.attributes.splice(index, 1)
-            }
-            index++;
+    for (const attribute of newVariations) {
+        if (!attribute.option) {
+            newVariations.splice(index, 1)
         }
-    }
-
-    if (variations.length == 1 && variations[0].length == 0) return product;
-
-    index = 0;
-    for (const variation of variations) {
-        let find: boolean[] = [];
-        for (const attribute of variation) {
-            const finded = product.attributes?.find(attr => {
-                return attr.id === attribute.id && attr.option?.toLowerCase() === attribute.option?.toLowerCase()
-            })
-            find.push(finded != undefined)
-        }
-
-        if (find.length && find.indexOf(false) == -1 ) {
-            product.attributes = []
-            return product
-        }
-
         index++;
     }
 
+    if (variations.length == 1 && variations[0].length == 0) {
+        return {
+            ...product,
+            attributes: newVariations
+        };
+    }
 
-    return product;
+    for (const variation of variations) {
+        const colorObj = variation.find(attribute => attribute.name === AttributeName.COLOR)
+        const sizeObj = variation.find(attribute => attribute.name === AttributeName.SIZE)
+
+        const colorNewObj = newVariations.find(attribute => attribute.id === 1)
+        const sizeNewObj = newVariations.find(attribute => attribute.id === 3)
+
+        const equals = []
+
+        if (colorObj && colorNewObj) {
+            equals.push(colorObj.option?.toLowerCase() === colorNewObj.option?.toLowerCase())
+        }
+
+        if (sizeObj && sizeNewObj) {
+            equals.push(sizeObj.option?.toLowerCase() === sizeNewObj.option?.toLowerCase())
+        }
+
+        if (equals.indexOf(false) == -1) {
+            return {
+                ...product,
+                attributes: []
+            }
+        }
+    }
+
+    console.log("variations", variations)
+    console.log("newVariations", newVariations)
+    console.log("\n\n\n\n\n");
+
+    return {
+        ...product,
+        attributes: newVariations
+    };
 }
 
 const createVariation = async (productId: number, variationProduct: Product) => {
@@ -95,7 +113,6 @@ const createVariation = async (productId: number, variationProduct: Product) => 
     variationProduct = getNewProductVariations(variationProduct, variations)
 
     if (variationProduct.attributes?.length == 0) return
-
 
     const res = await destinationData.createVariation(productId, variationProduct)
     return res.data

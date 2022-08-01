@@ -60,7 +60,7 @@ const execute = async () => {
   }*/
 
   // Insert new products child
-  for (const childProd of children.slice(0, 1)) {
+  for (const childProd of children) {
     try {
       const product = await productController.insertProductVariation(destinationProducts, childProd, categories, sourceAvailability, children, attributes, async () => {
         categories = await categoryController.fetchCategories()

@@ -122,7 +122,6 @@ const getAttributesOptions = (product: SourceProduct, attributes: Attribute[]): 
 }
 
 const mergeAttributes = (attributes: Attribute[], attributesToMerge: Attribute[]): Attribute[] => {
-    console.log('mergeAttributes', attributes, attributesToMerge);
     attributesToMerge.forEach(attribute => {
         const obj = attributes.find(a => a.id === attribute.id);
         if (obj) {
@@ -145,7 +144,6 @@ const mergeAttributes = (attributes: Attribute[], attributesToMerge: Attribute[]
             }
         }
     })
-    console.log('mergedAttributes', attributes);
     return attributes;
 }
 
