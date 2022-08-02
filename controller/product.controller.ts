@@ -34,13 +34,18 @@ const fetchAttributes = async () : Promise<Attribute[]>=> {
     return data
 }
 
-const fetchProductVariations = async (productId: number): Promise<Array<Attribute[]>> => {
+const fetchVariations = async (productId: number): Promise<Product[]> => {
     const res = await destinationData.fetchProductVariations(productId)
+    return res
+}
 
+const fetchProductVariations = async (productId: number, products: Product[]): Promise<Array<Attribute[]>> => {
     const variations: Array<Attribute[]> = []
 
-    res.forEach((variation) => {
-      variations.push(variation.attributes)
+    products.forEach((variation) => {
+        if (variation.attributes) {
+            variations.push(variation.attributes)
+        }
     })
 
     return variations
@@ -98,21 +103,44 @@ const getNewProductVariations = (product: Product, variations: Array<Attribute[]
         }
     }
 
-    console.log("variations", variations)
-    console.log("newVariations", newVariations)
-    console.log("\n\n\n\n\n");
-
     return {
         ...product,
         attributes: newVariations
     };
 }
 
+const updateProduct = async (product: Product, allVariations: Product[], idProduct: number): Promise<Product> => {
+    const idVariation = allVariations.find(variation => variation.sku === product.sku)?.id;
+    if (!idVariation) {
+        throw new Error('Variazione non trovata')
+    }
+
+    if (idVariation == 24589) {
+        console.log('variation 24589')
+    }
+
+    const newProd = {
+        regular_price: product.regular_price,
+        stock_quantity: product.stock_quantity,
+        price: product.regular_price,
+    }
+
+    const updatedProd = await destinationData.updateVariation(newProd, idProduct, idVariation)
+    return updatedProd.data
+}
+
 const createVariation = async (productId: number, variationProduct: Product) => {
-    const variations: Array<Attribute[]> = await fetchProductVariations(productId)
+    const allVariations = await fetchVariations(productId)
+    const variations: Array<Attribute[]> = await fetchProductVariations(productId, allVariations)
     variationProduct = getNewProductVariations(variationProduct, variations)
 
-    if (variationProduct.attributes?.length == 0) return
+    if (variationProduct.attributes?.length == 0) {
+        try {
+            return await updateProduct (variationProduct, allVariations, productId)
+        } catch (e) {
+            console.error(e)
+        }
+    }
 
     const res = await destinationData.createVariation(productId, variationProduct)
     return res.data

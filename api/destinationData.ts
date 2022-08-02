@@ -38,8 +38,8 @@ const fetchProducts = async (): Promise<Product[]> => {
     return products
 }
 
-const fetchProductVariations = async (productId: number): Promise<{attributes: Attribute[]}[]> => {
-    const variations: {attributes: Attribute[]}[] = []
+const fetchProductVariations = async (productId: number): Promise<Product[]> => {
+    const variations: Product[] = []
     const res = await api.get(`products/${productId}/variations`);
     variations.push(...res.data)
 
@@ -87,6 +87,7 @@ const createVariation = async (productId: number, variationProduct: Product): Pr
         manage_stock: true,
         stock_quantity: variationProduct.stock_quantity,
         image: 'image' in variationProduct ? variationProduct.image : null,
+        sku: variationProduct.sku,
     }
 
     return await api.post(`products/${productId}/variations`, newProd);
@@ -94,6 +95,10 @@ const createVariation = async (productId: number, variationProduct: Product): Pr
 
 const execVariation = async (product: Product) => {
     return await api.post(`products/${product.id}/variations`, product.attributes);
+}
+
+const updateVariation = async (product: Partial<Product>, idProduct: number, idVariation: number) => {
+    return await api.put(`products/${idProduct}/variations/${idVariation}`, product);
 }
 
 export const destinationData = {
@@ -107,5 +112,6 @@ export const destinationData = {
     fetchById,
     createVariation,
     updateProduct,
-    execVariation
+    execVariation,
+    updateVariation
 }
