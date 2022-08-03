@@ -115,10 +115,6 @@ const updateProduct = async (product: Product, allVariations: Product[], idProdu
         throw new Error('Variazione non trovata')
     }
 
-    if (idVariation == 24589) {
-        console.log('variation 24589')
-    }
-
     const newProd = {
         regular_price: product.regular_price,
         stock_quantity: product.stock_quantity,
