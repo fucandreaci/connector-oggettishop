@@ -243,7 +243,8 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
     // Obtain the images
     const getImages = () => {
         const images = utils.getImages(product)
-        return images.length > 0 ? [images[0]] : [];
+        const betterImage = utils.getBetterImage(images)
+        return images.length > 0 && betterImage ? [betterImage] : [];
     }
 
     // Obtain the availability
@@ -290,11 +291,13 @@ const updateAttribute = async (product: Product, sourceProduct: SourceProduct, a
     product.attributes = utils.mergeAttributes(product.attributes || [], newAttributes)
 
     const readedImages = utils.getImages(sourceProduct)
+    const betterImage = utils.getBetterImage(readedImages) || {}
+
 
     if ('images' in product && product.images.length > 0) {
         const findedImage = product.images.find(image => image.src === readedImages[0].src)
         if (!findedImage) {
-            product.images.push(readedImages[0])
+            product.images.push(betterImage)
         }
     }
     return await destinationData.updateProduct(product);
