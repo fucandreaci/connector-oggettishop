@@ -49,7 +49,7 @@ const execute = async () => {
   const attributes = await productController.fetchAttributes()
 
   // Insert new products
-  /*for (const parentProd of parents.slice(0, 70)) {
+  for (const parentProd of parents.slice(0, 70)) {
     try {
       const product = await productController.insertNewProduct(destinationProducts, parentProd, categories, sourceAvailability, parents, attributes,async () => {
         categories = await categoryController.fetchCategories()
@@ -57,10 +57,10 @@ const execute = async () => {
     } catch (e) {
       console.log('Si è verificato un errore')
     }
-  }*/
+  }
 
   // Insert new products child
-  for (const childProd of children) {
+  for (const childProd of children.slice(0, 300)) {
     try {
       const product = await productController.insertProductVariation(destinationProducts, childProd, categories, sourceAvailability, children, attributes, async () => {
         categories = await categoryController.fetchCategories()
