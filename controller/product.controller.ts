@@ -182,7 +182,7 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
 
     // Obtain the images
     const images = utils.getImages(product)
-    const betterImage = utils.getBetterImage(images) || {}
+    const betterImage = utils.getBetterImage(images)
 
     // Obtain the availability
     const availability = utils.getAvailability(product, availableProducts)
@@ -194,7 +194,7 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         categories: category.id ? [category] : [],
         sku: product.codice,
         description: product.descrizione_articolo,
-        image: images.length > 0 ? betterImage : {},
+        image: images.length > 0 && betterImage ? betterImage : {},
         dimensions: sizes,
         manage_stock: true,
         stock_quantity: qtaAvailable,
