@@ -61,6 +61,53 @@ const getImages = (product: SourceProduct): Image[] => {
     return images;
 }
 
+const getImageDimension = (image: Image): number => {
+    // https://catalogs-online.com/images/700x700/CA600NE.jpg
+
+    const url = image.src;
+
+    if (!url) return -1;
+    const parts = url.replace('https://', '').split('/');
+
+    if (parts.length < 4) return -1;
+    const dimension = parts[2];
+    if (!dimension) return -1;
+
+    const dimensionParts = dimension.split('x');
+    if (dimensionParts.length < 2) return -1;
+    const width = dimensionParts[0];
+    const height = dimensionParts[1];
+    if (!width || !height) return -1;
+    return parseInt(width);
+}
+
+const getBetterImage = (images: Image[]): Image | undefined => {
+    const imagesWithDimension: {
+        image: Image,
+        dimension: number
+    }[] = []
+
+    images.forEach(image => {
+        const dimension = getImageDimension(image);
+        imagesWithDimension.push({
+            image,
+            dimension
+        })
+    })
+
+    const sortedImages = imagesWithDimension.sort((a, b) => a.dimension - b.dimension);
+
+    const image500 = sortedImages.find(i => i.dimension == 500);
+    if (image500) return image500.image;
+
+    const bestImages = sortedImages.filter(i => i.dimension > 250);
+    if (!bestImages) return undefined;
+
+    // get random image
+    const randomIndex = Math.floor(Math.random() * bestImages.length);
+    return bestImages[randomIndex].image;
+}
+
 const getAvailability = (product: SourceProduct, availableProducts: Availability[]): Availability | undefined => {
     return availableProducts.find(p => p.codice === product.codice);
 }
@@ -155,5 +202,6 @@ export const utils = {
     getAttributeIdByName,
     getAttributes,
     getAttributesOptions,
-    mergeAttributes
+    mergeAttributes,
+    getBetterImage
 }
