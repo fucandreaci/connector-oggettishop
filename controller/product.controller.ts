@@ -295,7 +295,7 @@ const updateAttribute = async (product: Product, sourceProduct: SourceProduct, a
 
 
     if ('images' in product && product.images.length > 0) {
-        const findedImage = product.images.find(image => image.src === readedImages[0].src)
+        const findedImage = product.images.find(image => image.src === betterImage.src)
         if (!findedImage) {
             product.images.push(betterImage)
         }
