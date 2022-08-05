@@ -105,7 +105,7 @@ const getBetterImage = (images: Image[]): Image | undefined => {
 
     // get random image
     const randomIndex = Math.floor(Math.random() * bestImages.length);
-    return bestImages[randomIndex] ? bestImages[randomIndex].image : undefined;
+    return bestImages[randomIndex] && bestImages[randomIndex].image ? bestImages[randomIndex].image : undefined;
 }
 
 const getAvailability = (product: SourceProduct, availableProducts: Availability[]): Availability | undefined => {
