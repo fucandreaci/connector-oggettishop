@@ -37,6 +37,8 @@ sourceData.fetchData().then(async products => {
 })*/
 
 const execute = async () => {
+  console.log('Start', new Date())
+
   // Source products initialization
   const sourceProducts = await sourceController.getProducts()
   const sourceAvailability = await sourceController.getAvailability()
@@ -71,6 +73,8 @@ const execute = async () => {
         // console.log('Si è verificato un errore', (e as any).response)
     }
   }
+
+  console.log('End', new Date())
 }
 
 execute()
