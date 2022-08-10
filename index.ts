@@ -51,7 +51,7 @@ const execute = async () => {
   const attributes = await productController.fetchAttributes()
 
   // Insert new products
-  for (const parentProd of parents) {
+/*  for (const parentProd of parents) {
     try {
       const product = await productController.insertNewProduct(destinationProducts, parentProd, categories, sourceAvailability, parents, attributes,async () => {
         categories = await categoryController.fetchCategories()
@@ -59,7 +59,8 @@ const execute = async () => {
     } catch (e) {
       console.log('Si è verificato un errore')
     }
-  }
+  }*/
+
 
   // Insert new products child
   const filteredChildren = children.filter(child => child.articolo_padre === 'PM215')

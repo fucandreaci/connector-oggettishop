@@ -112,7 +112,7 @@ const getNewProductVariations = (product: Product, variations: Array<Attribute[]
 const updateProduct = async (product: Product, allVariations: Product[], idProduct: number): Promise<Product> => {
     const idVariation = allVariations.find(variation => variation.sku === product.sku)?.id;
     if (!idVariation) {
-        throw new Error('Variazione non trovata')
+        throw new Error('Variazione ' + product.sku + ' non trovata')
     }
 
     const newProd = {
