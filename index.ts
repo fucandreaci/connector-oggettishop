@@ -62,7 +62,8 @@ const execute = async () => {
   }
 
   // Insert new products child
-  for (const childProd of children) {
+  const filteredChildren = children.filter(child => child.articolo_padre === 'PM215')
+  for (const childProd of filteredChildren) {
     try {
       const product = await productController.insertProductVariation(destinationProducts, childProd, categories, sourceAvailability, children, attributes, async () => {
         categories = await categoryController.fetchCategories()
