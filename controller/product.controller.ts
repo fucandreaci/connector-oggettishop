@@ -82,8 +82,8 @@ const getNewProductVariations = (product: Product, variations: Array<Attribute[]
         const colorObj = variation.find(attribute => attribute.name === AttributeName.COLOR)
         const sizeObj = variation.find(attribute => attribute.name === AttributeName.SIZE)
 
-        const colorNewObj = newVariations.find(attribute => attribute.id === 1)
-        const sizeNewObj = newVariations.find(attribute => attribute.id === 3)
+        const colorNewObj = newVariations.find(attribute => attribute.id === 5)
+        const sizeNewObj = newVariations.find(attribute => attribute.id === 6)
 
         const equals = []
 
@@ -95,7 +95,7 @@ const getNewProductVariations = (product: Product, variations: Array<Attribute[]
             equals.push(sizeObj.option?.toLowerCase() === sizeNewObj.option?.toLowerCase())
         }
 
-        if (equals.indexOf(false) == -1) {
+        if (equals.length && equals.indexOf(false) == -1) {
             return {
                 ...product,
                 attributes: []
