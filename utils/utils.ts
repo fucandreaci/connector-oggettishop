@@ -8,7 +8,6 @@
 
 import {Availability, SourceProduct} from '../models/Source';
 import {Attribute, AttributeName, Dimension, Image} from '../models/Destination';
-import * as url from 'url';
 import axios from 'axios';
 
 const getDimension = (product: SourceProduct): Dimension => {
