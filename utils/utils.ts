@@ -8,6 +8,8 @@
 
 import {Availability, SourceProduct} from '../models/Source';
 import {Attribute, AttributeName, Dimension, Image} from '../models/Destination';
+import * as url from 'url';
+import axios from 'axios';
 
 const getDimension = (product: SourceProduct): Dimension => {
     const originalDimension = product.dimensione_articolo;
@@ -81,7 +83,7 @@ const getImageDimension = (image: Image): number => {
     return parseInt(width);
 }
 
-const getBetterImage = (images: Image[]): Image | undefined => {
+const getBetterImage = async (images: Image[]): Promise<Image | undefined> => {
     const imagesWithDimension: {
         image: Image,
         dimension: number
@@ -97,15 +99,33 @@ const getBetterImage = (images: Image[]): Image | undefined => {
 
     const sortedImages = imagesWithDimension.sort((a, b) => a.dimension - b.dimension);
 
-    const image500 = sortedImages.find(i => i.dimension == 500);
-    if (image500) return image500.image;
+    const image500 = sortedImages.filter(i => i.dimension == 500);
+    //if (image500) return image500.image;
 
-    const bestImages = sortedImages.filter(i => i.dimension > 250);
-    if (!bestImages) return undefined;
+    const bestImages = image500 ? image500 : sortedImages.filter(i => i.dimension > 250);
 
     // get random image
-    const randomIndex = Math.floor(Math.random() * bestImages.length);
-    return bestImages[randomIndex] && bestImages[randomIndex].image ? bestImages[randomIndex].image : undefined;
+    while (bestImages.length) {
+        const randomIndex = Math.floor(Math.random() * bestImages.length);
+        const image = bestImages[randomIndex];
+        if (image && image.image && image.image.src) {
+            try {
+                const imgFetch = await imageExists(image.image.src)
+                if (imgFetch.status==200)
+                    return image.image;
+            } catch (e) {
+                console.log('404 immagine', image.image.src)
+            }
+        }
+        bestImages.splice(randomIndex, 1);
+    }
+
+    return undefined;
+}
+
+const imageExists = async (url: string) => {
+    return await axios.get(url)
+
 }
 
 const getAvailability = (product: SourceProduct, availableProducts: Availability[]): Availability | undefined => {

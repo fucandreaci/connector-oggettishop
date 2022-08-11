@@ -182,7 +182,7 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
 
     // Obtain the images
     const images = utils.getImages(product)
-    const betterImage = utils.getBetterImage(images)
+    const betterImage = await utils.getBetterImage(images)
 
     // Obtain the availability
     const availability = utils.getAvailability(product, availableProducts)
@@ -241,9 +241,9 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
     const sizes = utils.getDimension(product)
 
     // Obtain the images
-    const getImages = () => {
+    const getImages = async () => {
         const images = utils.getImages(product)
-        const betterImage = utils.getBetterImage(images)
+        const betterImage = await utils.getBetterImage(images)
         return images.length > 0 && betterImage ? [betterImage] : [];
     }
 
@@ -257,7 +257,7 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
         categories: category.id ? [category] : [],
         sku: product.codice,
         description: product.descrizione_articolo + product.materiale_articolo ? ' Materiale: ' + product.materiale_articolo : '',
-        images: getImages(),
+        images: await getImages(),
         dimensions: sizes,
         manage_stock: !isVariable,
         stock_quantity: qtaAvailable,
@@ -291,7 +291,7 @@ const updateAttribute = async (product: Product, sourceProduct: SourceProduct, a
     product.attributes = utils.mergeAttributes(product.attributes || [], newAttributes)
 
     const readedImages = utils.getImages(sourceProduct)
-    const betterImage = utils.getBetterImage(readedImages) || {}
+    const betterImage = await utils.getBetterImage(readedImages) || {}
 
 
     if ('images' in product && product.images.length > 0) {
