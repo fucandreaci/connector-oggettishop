@@ -118,7 +118,7 @@ const updateProduct = async (product: Product, allVariations: Product[], idProdu
     const newProd = {
         regular_price: product.regular_price,
         stock_quantity: product.stock_quantity,
-        price: product.regular_price,
+        price: product.regular_price
     }
 
     const updatedProd = await destinationData.updateVariation(newProd, idProduct, idVariation)
@@ -164,13 +164,16 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         codice: product.articolo_padre,
     }
 
+    const isUpdating = exist(parentProd.codice, products) != undefined;
+
     const parent = await insertNewProduct(products, parentProd, categories, availableProducts, sourceProducts, attributes, fetchCategories, fetchProducts, true);
     if (!parent || !parent.id) {
         throw new Error("Errore nella creazione del prodotto genitore")
     }
 
+
     try {
-        const updatedData = await updateAttribute(parent, product, attributes)
+        const updatedData = await updateAttribute(parent, product, attributes, isUpdating)
     } catch (e) {
         console.log("Errore", e)
     }
@@ -256,13 +259,13 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
         name: product.nome_articolo,
         categories: category.id ? [category] : [],
         sku: product.codice,
-        description: product.descrizione_articolo + product.materiale_articolo ? ' Materiale: ' + product.materiale_articolo : '',
+        description: product.descrizione_articolo + (product.materiale_articolo ? ' \n<b>Materiale</b>: ' + product.materiale_articolo : ''),
         images: await getImages(),
         dimensions: sizes,
         manage_stock: !isVariable,
         stock_quantity: qtaAvailable,
         regular_price: (product.Listino_rivenditori * 3).toString(),
-        short_description: product.descrizione_articolo + product.materiale_articolo ? ' Materiale: ' + product.materiale_articolo : '',
+        short_description: product.descrizione_articolo + (product.materiale_articolo ? ' \n<b>Materiale</b>: ' + product.materiale_articolo : ''),
         parent_id: getParentId(product, sourceProducts, products),
         attributes: isVariable ? utils.getAttributesOptions(product, attributes) : utils.getAttributes(product, attributes),
         type: isVariable ? 'variable' : 'simple'
@@ -286,7 +289,22 @@ const update = async (product: Product, fetchProducts?: () => void): Promise<Pro
     }
 }
 
-const updateAttribute = async (product: Product, sourceProduct: SourceProduct, attributes: Attribute[])/*: Promise<Product|undefined>*/ => {
+/*const isAttributeEdited = (started: Attribute[], ended: Attribute[]): boolean => {
+    let equals = true;
+
+    started.forEach(startedAttribute => {
+        const attr = ended.find(endedAttribute => endedAttribute.name === startedAttribute.name)
+        if (!attr) {
+            equals = false;
+        } else {
+            if (startedAttribute.)
+        }
+
+
+    }
+})*/
+
+const updateAttribute = async (product: Product, sourceProduct: SourceProduct, attributes: Attribute[], isUpdating?: boolean)/*: Promise<Product|undefined>*/ => {
     const newAttributes = utils.getAttributesOptions(sourceProduct, attributes);
     product.attributes = utils.mergeAttributes(product.attributes || [], newAttributes)
 
@@ -295,7 +313,7 @@ const updateAttribute = async (product: Product, sourceProduct: SourceProduct, a
 
 
     if ('images' in product && product.images.length > 0) {
-        const findedImage = product.images.find(image => image.src === betterImage.src)
+        const findedImage = product.images.find(image => image.src?.includes(sourceProduct.codice))
         if (!findedImage) {
             product.images.push(betterImage)
         }

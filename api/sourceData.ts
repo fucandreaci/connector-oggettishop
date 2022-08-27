@@ -6,8 +6,8 @@
  * Copyright © 2022-2022 Andrea Fucci
  */
 
-import allProd from '../allProd_original.json';
-import availability from '../dispo.json';
+import allProd from '../allProd.json';
+import availability from '../dispo_original.json';
 import {Availability, SourceProduct} from '../models/Source';
 
 const fetchProducts = (): Promise<SourceProduct[]> => {
