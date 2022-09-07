@@ -262,6 +262,7 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
         description: product.descrizione_articolo + (product.materiale_articolo ? ' \n<b>Materiale</b>: ' + product.materiale_articolo : ''),
         images: await getImages(),
         dimensions: sizes,
+        weight: product.peso_articolo._.toString(),
         manage_stock: !isVariable,
         stock_quantity: qtaAvailable,
         regular_price: (product.Listino_rivenditori * 3).toString(),
@@ -306,7 +307,13 @@ const update = async (product: Product, fetchProducts?: () => void): Promise<Pro
 
 const updateAttribute = async (product: Product, sourceProduct: SourceProduct, attributes: Attribute[], isUpdating?: boolean)/*: Promise<Product|undefined>*/ => {
     const newAttributes = utils.getAttributesOptions(sourceProduct, attributes);
-    product.attributes = utils.mergeAttributes(product.attributes || [], newAttributes)
+    product.attributes = utils.mergeAttributes(product.attributes || [], newAttributes);
+
+    product = {
+        ...product,
+        dimensions: utils.getDimension(sourceProduct),
+        weight: sourceProduct.peso_articolo._.toString()
+    }
 
     const readedImages = utils.getImages(sourceProduct)
     const betterImage = await utils.getBetterImage(readedImages) || {}

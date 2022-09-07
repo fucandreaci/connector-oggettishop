@@ -21,6 +21,7 @@ export type Product = {
     tags?: Tag[];
     attributes?: Attribute[];
     type?: 'simple' | 'variable';
+    weight?: string;
 } & ({
     images: Image[];
 } | {

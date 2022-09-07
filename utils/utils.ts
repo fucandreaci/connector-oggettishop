@@ -10,7 +10,7 @@ import {Availability, SourceProduct} from '../models/Source';
 import {Attribute, AttributeName, Dimension, Image} from '../models/Destination';
 import axios from 'axios';
 
-const getDimension = (product: SourceProduct): Dimension => {
+const getDimensionArticolo = (product: SourceProduct): Dimension => {
     const originalDimension = product.dimensione_articolo;
     if (!originalDimension) {
         return {
@@ -42,6 +42,14 @@ const getDimension = (product: SourceProduct): Dimension => {
         length: validParts.length >= 1 ? parseFloat(validParts[0]).toString() : '',
         width: validParts.length >= 2 ? parseFloat(validParts[1]).toString() : '',
         height: validParts.length >= 3 ? parseFloat(validParts[2]).toString() : ''
+    }
+}
+
+const getDimension = (product: SourceProduct): Dimension => {
+    return {
+        length: product.dimensione_1_carton._.toString(),
+        width: product.dimensione_2_carton._.toString(),
+        height: product.dimensione_3_carton._.toString()
     }
 }
 
