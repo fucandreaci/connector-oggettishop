@@ -54,6 +54,7 @@ const execute = async () => {
   for (const parentProd of parents) {
     parentProd.categoria = 'Non-categorizzati'
     parentProd.settore = ''
+    parentProd.catalogo = ''
     try {
       const product = await productController.insertNewProduct(destinationProducts, parentProd, categories, sourceAvailability, parents, attributes,async () => {
         categories = await categoryController.fetchCategories()
@@ -68,6 +69,7 @@ const execute = async () => {
   for (const childProd of children) {
     childProd.categoria = 'Non-categorizzati'
     childProd.settore = ''
+    childProd.catalogo = ''
     try {
       const product = await productController.insertProductVariation(destinationProducts, childProd, categories, sourceAvailability, children, attributes, async () => {
         categories = await categoryController.fetchCategories()

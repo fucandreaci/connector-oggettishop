@@ -10,7 +10,7 @@ import {Attribute, AttributeName, Category, Product} from '../models/Destination
 import {destinationData} from '../api/destinationData';
 import {Availability, SourceProduct} from '../models/Source';
 import {categoryController} from './category.controller';
-import {utils} from '../utils/utils';
+import {setMinQta, utils} from '../utils/utils';
 
 const fetchProducts = async () : Promise<Product[]>=> {
     const data = await destinationData.fetchProducts()
@@ -118,7 +118,8 @@ const updateProduct = async (product: Product, allVariations: Product[], idProdu
     const newProd = {
         regular_price: product.regular_price,
         stock_quantity: product.stock_quantity,
-        price: product.regular_price
+        price: product.regular_price,
+        meta_data: product.meta_data,
     }
 
     const updatedProd = await destinationData.updateVariation(newProd, idProduct, idVariation)
@@ -196,14 +197,15 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         name: product.nome_articolo,
         categories: category.id ? [category] : [],
         sku: product.codice,
-        description: product.descrizione_articolo,
+        description: '',//product.descrizione_articolo,
         image: images.length > 0 && betterImage ? betterImage : {},
         dimensions: sizes,
         manage_stock: true,
         stock_quantity: qtaAvailable,
         regular_price: (product.Listino_rivenditori * 3).toString(),
-        short_description: product.descrizione_articolo,
-        attributes: utils.getAttributes(product, attributes)
+        short_description: utils.getFormattedDescription(product),
+        attributes: utils.getAttributes(product, attributes),
+        meta_data: [utils.setMinQta(product.inner_carton + 2)],
     }
 
     const createdProduct = await createVariation(parentId, newProduct);
@@ -259,17 +261,18 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
         name: product.nome_articolo,
         categories: category.id ? [category] : [],
         sku: product.codice,
-        description: product.descrizione_articolo + (product.materiale_articolo ? ' \n<b>Materiale</b>: ' + product.materiale_articolo : ''),
+        description: '',//product.descrizione_articolo + (product.materiale_articolo ? ' \n<b>Materiale</b>: ' + product.materiale_articolo : ''),
         images: await getImages(),
         dimensions: sizes,
         weight: product.peso_articolo._.toString(),
         manage_stock: !isVariable,
         stock_quantity: qtaAvailable,
         regular_price: (product.Listino_rivenditori * 3).toString(),
-        short_description: product.descrizione_articolo + (product.materiale_articolo ? ' \n<b>Materiale</b>: ' + product.materiale_articolo : ''),
+        short_description: utils.getFormattedDescription(product),
         parent_id: getParentId(product, sourceProducts, products),
         attributes: isVariable ? utils.getAttributesOptions(product, attributes) : utils.getAttributes(product, attributes),
-        type: isVariable ? 'variable' : 'simple'
+        type: isVariable ? 'variable' : 'simple',
+        meta_data: [utils.setMinQta(product.inner_carton + 2)],
     }
 
     const createdProduct = await create(newProduct);
@@ -312,7 +315,10 @@ const updateAttribute = async (product: Product, sourceProduct: SourceProduct, a
     product = {
         ...product,
         dimensions: utils.getDimension(sourceProduct),
-        weight: sourceProduct.peso_articolo._.toString()
+        weight: sourceProduct.peso_articolo._.toString(),
+        short_description: utils.getFormattedDescription(sourceProduct),
+        description: '',
+        meta_data: [utils.setMinQta(sourceProduct.inner_carton + 2)],
     }
 
     const readedImages = utils.getImages(sourceProduct)

@@ -22,11 +22,17 @@ export type Product = {
     attributes?: Attribute[];
     type?: 'simple' | 'variable';
     weight?: string;
+    meta_data?: MetaData[];
 } & ({
     images: Image[];
 } | {
     image: Image
 })
+
+export interface MetaData {
+    key: string;
+    value: string;
+}
 
 export interface Dimension{
     length: string | ''; // lunghezza

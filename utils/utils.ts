@@ -7,7 +7,7 @@
  */
 
 import {Availability, SourceProduct} from '../models/Source';
-import {Attribute, AttributeName, Dimension, Image} from '../models/Destination';
+import {Attribute, AttributeName, Dimension, Image, MetaData} from '../models/Destination';
 import axios from 'axios';
 
 const getDimensionArticolo = (product: SourceProduct): Dimension => {
@@ -221,6 +221,32 @@ const mergeAttributes = (attributes: Attribute[], attributesToMerge: Attribute[]
     return attributes;
 }
 
+const getFormattedDescription = (product: SourceProduct): string => {
+    let description = product.descrizione_articolo;
+    description = description.split("tecnica di stampa")[0];
+    description = description.replace(/\n/g, ', ');
+    description = description.replace('<br>', ', ');
+
+    const lastChar = description.slice(-2);
+    if (lastChar == ', ') {
+        description = description.slice(0, -2);
+    }
+
+    description = description + '\n\n<b style="color: #333">Quantità minima</b>: ' + product.inner_carton + ' pz';
+    description = description + (product.materiale_articolo ? ' \n<b style="color: #333">Materiale</b>: ' + product.materiale_articolo : '')
+    description = description + '\n<b style="color: #333">Dimensioni</b>: ' + product.dimensione_articolo;
+    description = description + '\n<b style="color: #333">Peso</b>: ' + product.peso_articolo._ + ' ' + product.peso_articolo.unit_of_measure;
+
+    return description;
+}
+
+export const setMinQta = (val: number): MetaData => {
+    return {
+        key: '_min_quantity',
+        value: val.toString()
+    }
+}
+
 export const utils = {
     getDimension,
     getImages,
@@ -230,5 +256,7 @@ export const utils = {
     getAttributes,
     getAttributesOptions,
     mergeAttributes,
-    getBetterImage
+    getBetterImage,
+    getFormattedDescription,
+    setMinQta
 }
