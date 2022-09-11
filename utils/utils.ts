@@ -232,7 +232,9 @@ const getFormattedDescription = (product: SourceProduct): string => {
         description = description.slice(0, -2);
     }
 
-    description = description + '\n\n<b style="color: #333">Quantità minima</b>: ' + product.inner_carton + ' pz';
+    const qta = product.inner_carton < 5 ? 5 : product.inner_carton;
+
+    description = description + '\n\n<b style="color: #333">Quantità minima</b>: ' + qta + ' pz';
     description = description + (product.materiale_articolo ? ' \n<b style="color: #333">Materiale</b>: ' + product.materiale_articolo : '')
     description = description + '\n<b style="color: #333">Dimensioni</b>: ' + product.dimensione_articolo;
     description = description + '\n<b style="color: #333">Peso</b>: ' + product.peso_articolo._ + ' ' + product.peso_articolo.unit_of_measure;
