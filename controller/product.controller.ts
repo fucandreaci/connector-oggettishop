@@ -194,7 +194,7 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
 
     // Create the product
     const newProduct: Product = {
-        name: product.nome_articolo,
+        name: product.nome_articolo.toLowerCase(),
         categories: category.id ? [category] : [],
         sku: product.codice,
         description: '',//product.descrizione_articolo,
@@ -205,7 +205,7 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
         regular_price: (product.Listino_rivenditori * 3).toString(),
         short_description: utils.getFormattedDescription(product),
         attributes: utils.getAttributes(product, attributes),
-        meta_data: [utils.setMinQta(product.inner_carton + 2)],
+        meta_data: [utils.setMinQta(product.inner_carton)],
     }
 
     const createdProduct = await createVariation(parentId, newProduct);
@@ -258,7 +258,7 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
 
     // Create the product
     const newProduct: Product = {
-        name: product.nome_articolo,
+        name: product.nome_articolo.toLowerCase(),
         categories: category.id ? [category] : [],
         sku: product.codice,
         description: '',//product.descrizione_articolo + (product.materiale_articolo ? ' \n<b>Materiale</b>: ' + product.materiale_articolo : ''),
@@ -272,7 +272,7 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
         parent_id: getParentId(product, sourceProducts, products),
         attributes: isVariable ? utils.getAttributesOptions(product, attributes) : utils.getAttributes(product, attributes),
         type: isVariable ? 'variable' : 'simple',
-        meta_data: [utils.setMinQta(product.inner_carton + 2)],
+        meta_data: [utils.setMinQta(product.inner_carton)],
     }
 
     const createdProduct = await create(newProduct);
@@ -318,7 +318,8 @@ const updateAttribute = async (product: Product, sourceProduct: SourceProduct, a
         weight: sourceProduct.peso_articolo._.toString(),
         short_description: utils.getFormattedDescription(sourceProduct),
         description: '',
-        meta_data: [utils.setMinQta(sourceProduct.inner_carton + 2)],
+        meta_data: [utils.setMinQta(sourceProduct.inner_carton)],
+        name: sourceProduct.nome_articolo.toLowerCase(),
     }
 
     const readedImages = utils.getImages(sourceProduct)

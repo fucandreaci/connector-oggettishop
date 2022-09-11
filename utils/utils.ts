@@ -241,6 +241,8 @@ const getFormattedDescription = (product: SourceProduct): string => {
 }
 
 export const setMinQta = (val: number): MetaData => {
+    if (val < 5) val = 5;
+
     return {
         key: '_min_quantity',
         value: val.toString()
