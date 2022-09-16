@@ -6,7 +6,7 @@
  * Copyright © 2022-2022 Andrea Fucci
  */
 
-import {Attribute, AttributeName, Category, Product} from '../models/Destination';
+import {Attribute, AttributeName, Category, Image, Product} from '../models/Destination';
 import {destinationData} from '../api/destinationData';
 import {Availability, SourceProduct} from '../models/Source';
 import {categoryController} from './category.controller';
@@ -120,6 +120,8 @@ const updateProduct = async (product: Product, allVariations: Product[], idProdu
         stock_quantity: product.stock_quantity,
         price: product.regular_price,
         meta_data: product.meta_data,
+        //image: 'image' in product ? product.image : null,
+        image: {}
     }
 
     const updatedProd = await destinationData.updateVariation(newProd, idProduct, idVariation)
@@ -185,20 +187,34 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
     const sizes = utils.getDimension(product)
 
     // Obtain the images
-    const images = utils.getImages(product)
-    const betterImage = await utils.getBetterImage(images)
+    const getImages = async (): Promise<Image[]> => {
+        const images = utils.getImages(product)
+        const betterImage = await utils.getBetterImage(images)
+
+        if ('images' in parent && betterImage) {
+            const findedImage = parent.images.find(image => image.src && image.src.includes(product.codice.slice(0, 7)))
+            if (!findedImage) {
+                return [betterImage]
+            }
+        }
+
+        return [];
+    }
 
     // Obtain the availability
     const availability = utils.getAvailability(product, availableProducts)
     const qtaAvailable = utils.getQtaAvailable(availability)
 
+    const imgs = await getImages()
+
     // Create the product
     const newProduct: Product = {
-        name: product.nome_articolo.toLowerCase(),
+        name: product.nome_articolo.charAt(0).toUpperCase() + product.nome_articolo.slice(1),
         categories: category.id ? [category] : [],
         sku: product.codice,
         description: '',//product.descrizione_articolo,
-        image: images.length > 0 && betterImage ? betterImage : {},
+        image: imgs.length ? imgs[0] : {},
+        //images: await getImages(),
         dimensions: sizes,
         manage_stock: true,
         stock_quantity: qtaAvailable,
@@ -258,7 +274,7 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
 
     // Create the product
     const newProduct: Product = {
-        name: product.nome_articolo.toLowerCase(),
+        name: product.nome_articolo.charAt(0).toUpperCase() + product.nome_articolo.slice(1),
         categories: category.id ? [category] : [],
         sku: product.codice,
         description: '',//product.descrizione_articolo + (product.materiale_articolo ? ' \n<b>Materiale</b>: ' + product.materiale_articolo : ''),
@@ -312,6 +328,13 @@ const updateAttribute = async (product: Product, sourceProduct: SourceProduct, a
     const newAttributes = utils.getAttributesOptions(sourceProduct, attributes);
     product.attributes = utils.mergeAttributes(product.attributes || [], newAttributes);
 
+    // Obtain the images
+    const getImages = async () => {
+        const images = utils.getImages(sourceProduct)
+        const betterImage = await utils.getBetterImage(images)
+        return images.length > 0 && betterImage ? [betterImage] : [];
+    }
+
     product = {
         ...product,
         dimensions: utils.getDimension(sourceProduct),
@@ -319,19 +342,20 @@ const updateAttribute = async (product: Product, sourceProduct: SourceProduct, a
         short_description: utils.getFormattedDescription(sourceProduct),
         description: '',
         meta_data: [utils.setMinQta(sourceProduct.inner_carton)],
-        name: sourceProduct.nome_articolo.toLowerCase(),
+        name: sourceProduct.nome_articolo.charAt(0).toUpperCase() + sourceProduct.nome_articolo.slice(1)
+        // images: await getImages(),
     }
 
     const readedImages = utils.getImages(sourceProduct)
     const betterImage = await utils.getBetterImage(readedImages) || {}
 
-
-    if ('images' in product && product.images.length > 0) {
-        const findedImage = product.images.find(image => image.src?.includes(sourceProduct.codice))
+    /*if ('images' in product) {
+        const findedImage = product.images.find(image => image.src && image.src.includes(sourceProduct.codice.slice(0, 7)))
+        product.images = []
         if (!findedImage) {
             product.images.push(betterImage)
         }
-    }
+    }*/
     return await destinationData.updateProduct(product);
 }
 

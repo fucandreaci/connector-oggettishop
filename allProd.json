@@ -49,7 +49,115 @@
         "https://catalogs-online.com/images/gallery/CA065/CA065_4_big.jpg"
       ]
     },
-    "Foto":"ACA065BC",
+    "Foto":"CA065BC",
+    "catalogo":"TAG",
+    "update":1661578207
+  },
+  {
+    "codice":"ACA065MC",
+    "articolo_padre":"ACA065",
+    "nome_articolo":"POCHETTE SMALL",
+    "descrizione_articolo":"borsello pochette/portadocumenti bicolore\nchiusura con bottoni a pressione\ncorredato di astuccio\nshopper Cavallari su richiesta: CA800 O CA810\ntecnica di stampa consigliata: serigrafica - incisione - a caldo",
+    "dimensione_articolo":"cm 23x15,5 ca",
+    "materiale_articolo":"poliuretano",
+    "colore_articolo":"MC",
+    "deco_colore_articolo":"Marrone celeste",
+    "taglia_articolo":"",
+    "peso_articolo":{
+      "_":0.194,
+      "unit_of_measure":"kg"
+    },
+    "dimensione_1_carton":{
+      "_":50,
+      "unit_of_measure":"cm"
+    },
+    "dimensione_2_carton":{
+      "_":50,
+      "unit_of_measure":"cm"
+    },
+    "dimensione_3_carton":{
+      "_":50,
+      "unit_of_measure":"cm"
+    },
+    "volume_carton":{
+      "_":0.125,
+      "unit_of_measure":"m3"
+    },
+    "inner_carton":1,
+    "box_carton":0,
+    "export_carton":50,
+    "settore":"Cavallari",
+    "categoria":"P.Documenti",
+    "Listino_rivenditori":3.266,
+    "Listino_pubblico":9.75,
+    "Link_Foto":{
+      "Foto":[
+        "https://catalogs-online.com/images/70x70/CA065MC.jpg",
+        "https://catalogs-online.com/images/150x150/CA065MC.jpg",
+        "https://catalogs-online.com/images/223x223/CA065MC.jpg",
+        "https://catalogs-online.com/images/278x278/CA065MC.jpg",
+        "https://catalogs-online.com/images/700x700/CA065MC.jpg",
+        "https://catalogs-online.com/images/500x500/CA065MC.jpg",
+        "https://catalogs-online.com/images/gallery/CA065/CA065_2_big.jpg",
+        "https://catalogs-online.com/images/gallery/CA065/CA065_3_big.jpg",
+        "https://catalogs-online.com/images/gallery/CA065/CA065_4_big.jpg"
+      ]
+    },
+    "Foto":"CA065MC",
+    "catalogo":"TAG",
+    "update":1661578207
+  },
+  {
+    "codice":"ACA065MR",
+    "articolo_padre":"ACA065",
+    "nome_articolo":"POCHETTE SMALL",
+    "descrizione_articolo":"borsello pochette/portadocumenti bicolore\nchiusura con bottoni a pressione\ncorredato di astuccio\nshopper Cavallari su richiesta: CA800 O CA810\ntecnica di stampa consigliata: serigrafica - incisione - a caldo",
+    "dimensione_articolo":"cm 23x15,5 ca",
+    "materiale_articolo":"poliuretano",
+    "colore_articolo":"MR",
+    "deco_colore_articolo":"Rosso Metal",
+    "taglia_articolo":"",
+    "peso_articolo":{
+      "_":0.194,
+      "unit_of_measure":"kg"
+    },
+    "dimensione_1_carton":{
+      "_":50,
+      "unit_of_measure":"cm"
+    },
+    "dimensione_2_carton":{
+      "_":50,
+      "unit_of_measure":"cm"
+    },
+    "dimensione_3_carton":{
+      "_":50,
+      "unit_of_measure":"cm"
+    },
+    "volume_carton":{
+      "_":0.125,
+      "unit_of_measure":"m3"
+    },
+    "inner_carton":1,
+    "box_carton":0,
+    "export_carton":50,
+    "settore":"Cavallari",
+    "categoria":"P.Documenti",
+    "Listino_rivenditori":3.266,
+    "Listino_pubblico":9.75,
+    "Link_Foto":{
+      "Foto":[
+        "https://catalogs-online.com/images/70x70/CA065MR.jpg",
+        "https://catalogs-online.com/images/150x150/CA065MR.jpg",
+        "https://catalogs-online.com/images/223x223/CA065MR.jpg",
+        "https://catalogs-online.com/images/278x278/CA065MR.jpg",
+        "https://catalogs-online.com/images/700x700/CA065MR.jpg",
+        "https://catalogs-online.com/images/500x500/CA065MR.jpg",
+        "https://catalogs-online.com/images/gallery/CA065/CA065_2_big.jpg",
+        "https://catalogs-online.com/images/gallery/CA065/CA065_3_big.jpg",
+        "https://catalogs-online.com/images/gallery/CA065/CA065_4_big.jpg"
+      ]
+    },
+    "Foto":"CA065MR",
     "catalogo":"TAG",
     "update":1661578207
   }
