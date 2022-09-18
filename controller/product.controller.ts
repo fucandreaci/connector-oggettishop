@@ -10,7 +10,7 @@ import {Attribute, AttributeName, Category, Image, Product} from '../models/Dest
 import {destinationData} from '../api/destinationData';
 import {Availability, SourceProduct} from '../models/Source';
 import {categoryController} from './category.controller';
-import {setMinQta, utils} from '../utils/utils';
+import {utils} from '../utils/utils';
 
 const fetchProducts = async () : Promise<Product[]>=> {
     const data = await destinationData.fetchProducts()
@@ -245,10 +245,10 @@ const insertProductIfNotExist = async (product: Product, products: Product[], fe
 
 const insertNewProduct = async (products: Product[], product: SourceProduct, categories: Category[], availableProducts: Availability[], sourceProducts: SourceProduct[], attributes: Attribute[], fetchCategories: () => void, fetchProducts: () => void, isVariable?: boolean) => {
     // If exist a product with the same name, we don't create a new one but we return the existent one
-    const findedProduct = exist(product.codice, products);
-    if (findedProduct != null) {
+    let findedProduct = exist(product.codice, products);
+    /*if (findedProduct != null) {
         return findedProduct;
-    }
+    }*/
 
     // If not exist a product with the same name, we create a new one
     // Fetch or create the category
@@ -289,6 +289,17 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
         attributes: isVariable ? utils.getAttributesOptions(product, attributes) : utils.getAttributes(product, attributes),
         type: isVariable ? 'variable' : 'simple',
         meta_data: [utils.setMinQta(product.inner_carton)],
+    }
+
+    if (findedProduct) {
+        if ('images' in findedProduct)
+            newProduct.images = findedProduct.images.map((image: Image) => ({id: image.id}));
+
+        findedProduct = (await destinationData.updateProduct({
+            ...newProduct,
+            id: findedProduct.id,
+        })).data;
+        return findedProduct;
     }
 
     const createdProduct = await create(newProduct);
