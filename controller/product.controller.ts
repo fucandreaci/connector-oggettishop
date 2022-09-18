@@ -209,7 +209,7 @@ const insertProductVariation = async (products: Product[], product: SourceProduc
 
     // Create the product
     const newProduct: Product = {
-        name: product.nome_articolo.charAt(0).toUpperCase() + product.nome_articolo.slice(1),
+        name: product.nome_articolo.charAt(0).toUpperCase() + product.nome_articolo.slice(1).toLowerCase(),
         categories: category.id ? [category] : [],
         sku: product.codice,
         description: '',//product.descrizione_articolo,
@@ -274,7 +274,7 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
 
     // Create the product
     const newProduct: Product = {
-        name: product.nome_articolo.charAt(0).toUpperCase() + product.nome_articolo.slice(1),
+        name: product.nome_articolo.charAt(0).toUpperCase() + product.nome_articolo.slice(1).toLowerCase(),
         categories: category.id ? [category] : [],
         sku: product.codice,
         description: '',//product.descrizione_articolo + (product.materiale_articolo ? ' \n<b>Materiale</b>: ' + product.materiale_articolo : ''),
