@@ -275,7 +275,7 @@ const insertNewProduct = async (products: Product[], product: SourceProduct, cat
     // Create the product
     const newProduct: Product = {
         name: product.nome_articolo.charAt(0).toUpperCase() + product.nome_articolo.slice(1).toLowerCase(),
-        categories: category.id ? [category] : [],
+        categories: category.id ? !findedProduct ? [category] : [{id: findedProduct.categories[0].id}] : [],
         sku: product.codice,
         description: '',//product.descrizione_articolo + (product.materiale_articolo ? ' \n<b>Materiale</b>: ' + product.materiale_articolo : ''),
         images: await getImages(),
