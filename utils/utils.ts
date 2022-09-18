@@ -132,7 +132,6 @@ const getBetterImage = async (images: Image[]): Promise<Image | undefined> => {
 
 const imageExists = async (url: string) => {
     return await axios.get(url)
-
 }
 
 const getAvailability = (product: SourceProduct, availableProducts: Availability[]): Availability | undefined => {
