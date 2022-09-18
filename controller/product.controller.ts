@@ -342,7 +342,7 @@ const updateAttribute = async (product: Product, sourceProduct: SourceProduct, a
         short_description: utils.getFormattedDescription(sourceProduct),
         description: '',
         meta_data: [utils.setMinQta(sourceProduct.inner_carton)],
-        name: sourceProduct.nome_articolo.charAt(0).toUpperCase() + sourceProduct.nome_articolo.slice(1)
+        name: sourceProduct.nome_articolo.charAt(0).toUpperCase() + sourceProduct.nome_articolo.slice(1).toLowerCase()
         // images: await getImages(),
     }
 
