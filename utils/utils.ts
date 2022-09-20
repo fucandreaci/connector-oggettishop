@@ -250,6 +250,11 @@ export const setMinQta = (val: number): MetaData => {
     }
 }
 
+const getPrice = (product: SourceProduct): string => {
+    if (product.Listino_rivenditori === 0) return '0';
+    return ((product.Listino_rivenditori * 2) + 0.01).toFixed(2).toString();
+}
+
 export const utils = {
     getDimension,
     getImages,
@@ -261,5 +266,6 @@ export const utils = {
     mergeAttributes,
     getBetterImage,
     getFormattedDescription,
-    setMinQta
+    setMinQta,
+    getPrice
 }
