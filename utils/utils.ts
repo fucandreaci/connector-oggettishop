@@ -140,7 +140,7 @@ const getAvailability = (product: SourceProduct, availableProducts: Availability
 
 const getQtaAvailable = (availableProduct: Availability | undefined): number => {
     if (!availableProduct) return 0;
-    return availableProduct.arrivi.arrivo.reduce((acc, curr) => acc + curr.qta, 0)
+    return availableProduct.arrivi.arrivo[0].qta;
 }
 
 const getAttributeIdByName = (name: AttributeName, attributes: Attribute[]): number => {
